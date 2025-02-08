@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\BackOffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Brand;
 use App\Models\Admin\Product;
+use App\Models\Admin\Tax;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,14 +20,21 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));               
 
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //return view with form to create a new product
-        return view('admin.products.create');
+        //return view with generated sku, taxes, brands and form to create a new product
+        do{
+            $sku = strtoupper("sku") . '-' . date("Ymd") . '-' . str_pad(rand(1, 999), 4, "0", STR_PAD_LEFT);
+        }while(Product::where('sku', $sku)->exists());
+        
+
+        $taxes = Tax::all();
+        $brands = Brand::all();
+
+        return view('admin.products.create', compact('taxes', 'brands', 'sku'));
     }
 
     /**
@@ -66,7 +75,7 @@ class ProductController extends Controller
         // Store product in database
         $product = Product::create($validatedData);
     
-        return redirect()->route('products.index')->with('success', 'Product added successfully!');
+        return redirect()->route('admin.products.create')->with('success', 'Product Created Successfully!');
     }
 
     /**
@@ -82,7 +91,14 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //show the editing form with the product data
+        $product = Product::findOrFail($id);
+        $taxes = Tax::all();
+        $brands = Brand::all();
+
+        return view('admin.products.edit', compact('product', 'taxes', 'brands'));
+
+
     }
 
     /**
@@ -90,7 +106,40 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Update the product in the database
+        $product = Product::findOrFail($id);
+        $validatedData = $request->validate([
+            // 'sku' => 'required|string|max:191|unique:products,sku,' . $product->id,
+            'name' => 'required|string|max:191',
+            'description' => 'nullable|string',
+            'content' => 'nullable|string',
+            'is_published' => 'boolean',
+            'quantity' => 'nullable|integer|min:0',
+            'allow_checkout_when_out_of_stock' => 'boolean',
+            'is_featured' => 'boolean',
+            'brand_id' => 'nullable|exists:brands,id',
+            'cost' => 'nullable|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
+            'sale_price' => 'nullable|numeric|min:0',
+            'sale_start_date' => 'nullable|date',
+            'sale_end_date' => 'nullable|date|after_or_equal:sale_start_date',
+            'length' => 'nullable|numeric|min:0',
+            'width' => 'nullable|numeric|min:0',
+            'height' => 'nullable|numeric|min:0',
+            'weight' => 'nullable|numeric|min:0',
+            'tax_id' => 'nullable|exists:taxes,id',
+            'image' => 'nullable|string|max:191',
+            'images' => 'nullable|string',
+            'product_type' => 'required|in:PHYSICAL,DIGITAL',
+            'barcode' => 'nullable|string|max:50',
+            'generate_license_code' => 'boolean',
+            'minimum_order_quantity' => 'integer|min:0',
+            'maximum_order_quantity' => 'integer|min:0',
+        ]);
+
+        $product->update($validatedData);
+
+        return redirect()->route('admin.products.create')->with('success', 'Product Updated Successfully!');
     }
 
     /**
@@ -98,6 +147,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Delete the product from the database
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin.products')->with('success', 'Product Deleted Successfully!');
     }
 }

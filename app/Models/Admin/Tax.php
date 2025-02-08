@@ -4,7 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Tax extends Model
 {
     //
     protected $guarded = [];

@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('admin/dashboard', function () {
-//     return view('about');
-// })->name('admin.dashboard');
+// Route::get('/', function () {
+//     return redirect()->route('admin.dashboard');
+// })->name('admin');
+
