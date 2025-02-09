@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\BackOffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -12,7 +13,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        //return view with all brands
+        $brands = Brand::all();
+        return view('admin.brands.index', compact('brands')); 
     }
 
     /**
