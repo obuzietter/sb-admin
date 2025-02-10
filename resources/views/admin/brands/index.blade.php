@@ -37,7 +37,7 @@
 
             {{-- table operations --}}
             <a href="{{ route('admin.brands.create') }}" class="btn btn-primary mx-1"><i class="fa-solid fa-plus"></i> Add
-                brand</a>
+                Brand</a>
             <a href="" class="btn btn-warning mx-1"><i class="fa-solid fa-sheet-plastic"></i>Export</a>
             <a href="" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>Delete Bulk</a>
 

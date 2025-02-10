@@ -23,7 +23,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        //return view with form to create a new brand
+        return view('admin.brands.create');
     }
 
     /**
@@ -31,7 +32,18 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate the request
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:191',
+            'description' => 'nullable|string',
+            'image' => 'nullable|string',
+        ]);
+        
+        // create a new brand
+        $brand = Brand::create($validatedData);
+
+        // redirect to the index page
+        return redirect()->route('admin.brands.create')->with('success', 'Brand created successfully');
     }
 
     /**
@@ -39,7 +51,8 @@ class BrandController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
+
     }
 
     /**
@@ -47,7 +60,10 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // return view with the brand
+        $brand = Brand::findOrFail($id);
+        return view('admin.brands.edit', compact('brand'));
+
     }
 
     /**
