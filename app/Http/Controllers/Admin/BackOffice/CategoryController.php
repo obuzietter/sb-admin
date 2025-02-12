@@ -49,6 +49,8 @@ class CategoryController extends Controller
             'is_active' => 'boolean',
         ]);
 
+        $is_active = $validated['is_active'] ?? false;
+
         // Generate slug if not provided
         $slug = $validated['slug'] ?? Str::slug($validated['name']);
 
@@ -74,7 +76,7 @@ class CategoryController extends Controller
             'meta_keywords' => $validated['meta_keywords'] ?? null,
             'display_order' => $validated['display_order'] ?? 0,
             'image_url' => $imagePath,
-            'is_active' => $request->has('is_active'),
+            'is_active' => $is_active,
         ]);
 
         return redirect()->route('admin.categories.create')->with('success', 'Category created successfully!');

@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="mb-3 form-check">
-                        <input type="checkbox" name="is_active" id="is_active" class="form-check-input"
+                        <input type="checkbox" name="is_active" id="is_active" class="form-check-input" value="1"
                             {{ old('is_active', true) ? 'checked' : '' }}>
                         <label for="is_active" class="form-check-label">Active</label>
                     </div>
