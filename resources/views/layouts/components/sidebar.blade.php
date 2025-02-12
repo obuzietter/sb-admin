@@ -33,6 +33,18 @@
                     <a class="nav-link" href="{{ route('admin.brands.create') }}">Create Brand</a>
                 </nav>
             </div>
+            {{-- categories drop down --}}
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseLayouts">
+                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                Categories
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseCategories" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ route('admin.categories') }}">All Categories</a>
+                    <a class="nav-link" href="{{ route('admin.categories.create') }}">Create Categories</a>
+                </nav>
+            </div>
 
 
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

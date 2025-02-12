@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\BackOffice\BrandController;
+use App\Http\Controllers\Admin\BackOffice\CategoryController;
 use App\Http\Controllers\Admin\BackOffice\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,11 +42,12 @@ Route::prefix('admin')->group(function () {
         Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
 
         #category routes
-        // Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
-        // Route::get('categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-        // Route::post('categories', [CategoryController::class, 'store'])->name('admin.categories.store');
-        // Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-        // Route::put('categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+        Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
+        Route::get('categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+        Route::post('categories', [CategoryController::class, 'store'])->name('admin.categories.store');
+        Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+        Route::put('categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+        Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
         
     });
 });
