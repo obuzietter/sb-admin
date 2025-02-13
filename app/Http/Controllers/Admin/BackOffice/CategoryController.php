@@ -26,7 +26,7 @@ class CategoryController extends Controller
     public function create()
     {
         //return view for creating a new category
-        $categories = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->orderBy('display_order')->get();
         $subcategories = Category::whereNotNull('parent_id')->get();
         return view('admin.categories.create', compact('categories', 'subcategories'));
     }
@@ -45,7 +45,6 @@ class CategoryController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'meta_keywords' => 'nullable|string|max:255',
-            'display_order' => 'nullable|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // 2MB max
             'is_active' => 'boolean',
         ]);
@@ -75,7 +74,6 @@ class CategoryController extends Controller
             'meta_title' => $validated['meta_title'] ?? null,
             'meta_description' => $validated['meta_description'] ?? null,
             'meta_keywords' => $validated['meta_keywords'] ?? null,
-            'display_order' => $validated['display_order'] ?? 0,
             'image_url' => $imagePath,
             'is_active' => $is_active,
         ]);
@@ -96,7 +94,11 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // return view with the category
+        $category = Category::findOrFail($id);
+        $categories = Category::whereNull('parent_id')->orderBy('display_order')->get();
+        $subcategories = Category::whereNotNull('parent_id')->get();
+        return view('admin.categories.edit', compact('category', 'categories', 'subcategories'));
     }
 
     /**
@@ -113,5 +115,46 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Update the display order of the categories
+     */
+
+    public function updateOrder(Request $request)
+    {
+        try {
+            // Validate request data
+            $validated = $request->validate([
+                'order' => 'required|array',
+                'order.*.id' => 'required|integer|exists:categories,id',
+            ]);
+            
+                foreach ($validated['order'] as $index => $item) {
+                    // Find category or throw a 404 error if not found
+                    $category = Category::findOrFail($item['id']);
+                    $category->display_order = $index;
+                    $category->save();
+                }
+            
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Category order updated successfully!'
+            ], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            // Log::error('Error updating category order: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'An unexpected error occurred. Please try again.',
+            ], 500);
+        }
     }
 }

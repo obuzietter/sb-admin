@@ -36,7 +36,7 @@
 
         <form method="POST" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <!-- General Information -->
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">

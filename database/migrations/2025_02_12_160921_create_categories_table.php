@@ -28,7 +28,7 @@ return new class extends Migration
               $table->string('meta_keywords')->nullable();
   
               // Display and status fields
-              $table->integer('display_order')->default(0);
+              $table->integer('display_order')->nullable();
               $table->boolean('is_active')->default(true);
   
               // Foreign key constraint for parent category

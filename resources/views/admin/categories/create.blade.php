@@ -40,6 +40,17 @@
                 <div class="card-body">
                     <h5 class="card-title">Draggable Category List</h5>
                     <p class="card-text">Drag and drop to change the display order of categories.</p>
+                    {{-- altert for success --}}
+                    <div id="alert-success" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+                        <span></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {{-- alert for error --}}
+                    <div id="alert-danger" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+                        <span></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
                     <div id="dragCategoryList">
                         @include('admin.categories.partials.category_list')
                     </div>
@@ -116,12 +127,7 @@
                         <fieldset class="border p-3 rounded mb-4">
                             <legend class="fw-bold text-danger">Additional Settings</legend>
 
-                            <div class="mb-3">
-                                <label for="display_order" class="form-label fw-bold">Display Order</label>
-                                <input type="number" name="display_order" id="display_order" class="form-control"
-                                    value="{{ old('display_order', 0) }}">
-                            </div>
-
+                         
                             <div class="mb-3">
                                 <label for="image" class="form-label fw-bold">Category Image</label>
                                 <input type="file" name="image" id="image" class="form-control">
