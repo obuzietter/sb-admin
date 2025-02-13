@@ -42,7 +42,7 @@
             <div class="collapse" id="collapseCategories" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ route('admin.categories') }}">All Categories</a>
-                    <a class="nav-link" href="{{ route('admin.categories.create') }}">Create Categories</a>
+                    <a class="nav-link" href="{{ route('admin.categories.create') }}">Create Category</a>
                 </nav>
             </div>
 

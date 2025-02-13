@@ -37,8 +37,7 @@
 
             {{-- table operations --}}
             <a href="{{ route('admin.categories.create') }}" class="btn btn-primary mx-1"><i class="fa-solid fa-plus"></i>
-                Add
-                category</a>
+                Add Category</a>
             <a href="" class="btn btn-warning mx-1"><i class="fa-solid fa-sheet-plastic"></i>Export</a>
             <a href="" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>Delete Bulk</a>
 

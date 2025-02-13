@@ -26,8 +26,9 @@ class CategoryController extends Controller
     public function create()
     {
         //return view for creating a new category
-        $categories = Category::all();
-        return view('admin.categories.create')->with('categories', $categories);
+        $categories = Category::whereNull('parent_id')->get();
+        $subcategories = Category::whereNotNull('parent_id')->get();
+        return view('admin.categories.create', compact('categories', 'subcategories'));
     }
 
     /**
