@@ -18,7 +18,7 @@
 
     @include('layouts.components.navbar')
 
-    <div id="layoutSidenav">
+    <div id="layoutSidenav" class="" >
         <div id="layoutSidenav_nav">
             @include('layouts.components.sidebar')
         </div>
