@@ -6,6 +6,14 @@ use App\Http\Controllers\Admin\BackOffice\CategoryController;
 use App\Http\Controllers\Admin\BackOffice\ProductController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/admin', function () {
+    return redirect()->route('admin.dashboard');
+    // return "<h1>Admin</h1>";
+});
+Route::get('/admini', function () {
+    // return redirect()->route('admin.dashboard');
+    return "<h1>Admin</h1>";
+});
 
 
 Route::prefix('admin')->group(function () {
@@ -18,9 +26,11 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
-    
+  
+
     
     Route::middleware('auth:admin')->group(function () {
+       
         Route::get('dashboard', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');

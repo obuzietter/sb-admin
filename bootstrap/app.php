@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectGuestsTo(function (Request $request) {
             // Check if the request is for an admin route
-            if ($request->is('admin/*')) {
+            if ($request->is('admin/*') ) {
                 return route('show.admin.login'); // Redirect admins to admin login
             }
     
