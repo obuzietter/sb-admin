@@ -98,7 +98,7 @@
                                     class="delete-form d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" data-name="{{ $category->name }}" onclick="deletecategory()">
+                                    <button type="submit" class="btn btn-danger delete-btn" data-name="{{ $category->name }}" onclick="deleteCategory()">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -119,7 +119,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function deletecategory() {
+        function deleteCategory() {
             //prevent the form from submitting
             event.preventDefault();
             Swal.fire({
@@ -132,6 +132,8 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    console.log(event.target.getAttribute('data-name') + " is deleted");
+                    
                     document.querySelector('.delete-form').submit();
                 }
             })

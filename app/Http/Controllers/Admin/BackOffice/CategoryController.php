@@ -170,6 +170,7 @@ class CategoryController extends Controller
     {
         // delete the category
         $category = Category::findOrFail($id);
+        // dd($category);x`
         $category->delete();
 
         return redirect()->route('admin.categories')->with('success', 'Category deleted successfully!');
