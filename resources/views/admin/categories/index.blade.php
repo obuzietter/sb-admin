@@ -51,6 +51,7 @@
                         <th>Name</th>
                         <th>Slug</th>
                         {{-- <th>Description</th> --}}
+                        <th>Image</th>
                         <th>Display Order</th>
                         <th>Is Active</th>
                         <th>Parent ID</th>
@@ -63,6 +64,7 @@
                         <th>Name</th>
                         <th>Slug</th>
                         {{-- <th>Description</th> --}}
+                        <th>Image</th>
                         <th>Display Order</th>
                         <th>Is Active</th>
                         <th>Parent ID</th>
@@ -77,6 +79,8 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
                             {{-- <td>{{ $category->description }}</td> --}}
+                            <td><img src="{{ asset('storage/' . $category->image_url) }}" alt="{{ $category->name }}"
+                                    style="width: 50px"></td>
                             <td>{{ $category->display_order }}</td>
                             <td>
                                 @if($category->is_active == 1)

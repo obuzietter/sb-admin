@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\BackOffice;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -108,7 +109,58 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate and update the category
+        // Validate input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name,' . $id,
+            // 'slug' => 'nullable|string|max:255|unique:categories,slug,' . $id,
+            'parent_id' => 'nullable|exists:categories,id',
+            'description' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+            'meta_keywords' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // 2MB max
+            'is_active' => 'boolean',
+        ]);
+
+        $is_active = $validated['is_active'] ?? false;
+
+        // Generate slug if not provided
+        $slug = Str::slug($validated['name']);
+
+        // $validated['slug'] ?? 
+
+        // Ensure slug is unique
+        // $count = Category::where('slug', $slug)->count();
+        // if ($count > 0) {
+        //     $slug .= '-' . ($count + 1);
+        // }
+
+        // Find category
+        $category = Category::findOrFail($id);
+
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('categories', 'public');
+            // Delete old image
+            if ($category->image_url) {
+                Storage::disk('public')->delete($category->image_url);
+            }
+            $category->image_url = $imagePath;
+        }
+
+        // Update Category
+        $category->name = $validated['name'];
+        $category->slug = $slug;
+        $category->parent_id = $validated['parent_id'] ?? null;
+        $category->description = $validated['description'] ?? null;
+        $category->meta_title = $validated['meta_title'] ?? null;
+        $category->meta_description = $validated['meta_description'] ?? null;
+        $category->meta_keywords = $validated['meta_keywords'] ?? null;
+        $category->is_active = $is_active;
+        $category->save();
+
+        return redirect()->route('admin.categories', $id)->with('success', 'Category updated successfully!');
     }
 
     /**
