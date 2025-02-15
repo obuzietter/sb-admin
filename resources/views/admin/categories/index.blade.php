@@ -50,25 +50,25 @@
                         <th></th>
                         <th>Name</th>
                         <th>Slug</th>
-                        <th>Description</th>
+                        {{-- <th>Description</th> --}}
                         <th>Display Order</th>
                         <th>Is Active</th>
                         <th>Parent ID</th>
                         <th></th>
                     </tr>
                 </thead>
-                {{-- <tfoot>
+                <tfoot>
                     <tr>
                         <th></th>
                         <th>Name</th>
                         <th>Slug</th>
-                        <th>Description</th>
+                        {{-- <th>Description</th> --}}
                         <th>Display Order</th>
                         <th>Is Active</th>
                         <th>Parent ID</th>
                         <th></th>
                     </tr>
-                </tfoot> --}}
+                </tfoot>
                 <tbody>
                     {{-- @dd($categories) --}}
                     @forelse($categories as $category)
@@ -76,10 +76,17 @@
                             <td><input type="checkbox" value="{{ $category->id }}"></td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
-                            <td>{{ $category->description }}</td>
+                            {{-- <td>{{ $category->description }}</td> --}}
                             <td>{{ $category->display_order }}</td>
-                            <td>{{ $category->is_active }}</td>
-                            <td>{{ $category->parent_id }}</td>
+                            <td>
+                                @if($category->is_active == 1)
+                                    <span class="badge badge-success" style="color: rgb(0, 186, 0); font-size: 1rem">YES</span>
+                                @else
+                                    <span class="badge badge-danger" style="color: rgb(254, 30, 30); font-size: 1rem">NO</span>
+                                @endif
+                            </td>
+                            
+                            <td>{{ $category->parent_id ?? "-" }}</td>
                             <td>
                                 <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>

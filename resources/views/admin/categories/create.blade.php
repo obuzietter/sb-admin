@@ -98,6 +98,17 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            {{-- text area input for description --}}
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-bold">Description</label>
+                                <textarea name="description" id="description" class="form-control"
+                                    rows="3">{{ old('description') }}</textarea>
+                            </div>
+                            
+
+
                         </fieldset>
 
                         <!-- SEO Metadata -->
