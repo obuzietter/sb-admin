@@ -98,7 +98,7 @@
                                     class="delete-form d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deletecategory()">
+                                    <button type="submit" class="btn btn-danger delete-btn" data-name="{{ $category->name }}" onclick="deletecategory()">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -124,7 +124,7 @@
             event.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "You won't be able to revert this!" + " " + event.target.getAttribute('data-name'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

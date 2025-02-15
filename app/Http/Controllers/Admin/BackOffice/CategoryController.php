@@ -168,7 +168,11 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // delete the category
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('admin.categories')->with('success', 'Category deleted successfully!');
     }
 
     /**
