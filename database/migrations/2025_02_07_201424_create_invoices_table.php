@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('coupon_code', 120)->nullable();
             $table->string('discount_description')->nullable();
             $table->unsignedDecimal('amount', 15, 2);
-            $table->enum('payment_status', ['UNPAID', 'PAID', 'PARTIAL'])->default('unpaid');
+            $table->enum('payment_status', ['pending', 'paid', 'partial', 'refunded', 'canceled', 'overdue'])->default('pending');
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });
