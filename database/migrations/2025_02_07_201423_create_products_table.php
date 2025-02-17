@@ -27,7 +27,8 @@ return new class extends Migration
             $table->boolean('is_featured')->default(0);
         
             // Inventory Management
-            $table->integer('quantity')->nullable()->default(0);
+            $table->double('quantity')->nullable()->default(0);
+            $table->double('threshold')->nullable()->default(0);
             $table->boolean('allow_checkout_when_out_of_stock')->default(0);
         
             // Pricing Information
