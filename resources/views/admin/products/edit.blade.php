@@ -104,14 +104,14 @@
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="allow_checkout_when_out_of_stock"
                                     name="allow_checkout_when_out_of_stock" value="1"
-                                    {{ old('allow_checkout_when_out_of_stock') ? 'checked' : '' }}>
+                                    {{ $product->allow_checkout_when_out_of_stock ? 'checked' : '' }}>
                                 <label class="form-check-label" for="allow_checkout_when_out_of_stock">Allow Checkout
                                     When Out of Stock</label>
                             </div>
                             <!-- Is Taxable -->
                             <div class="col-md-6 mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="is_taxable" name="is_taxable"
-                                    value="1" {{ old('is_taxable') ? 'checked' : '' }}>
+                                    value="1" {{ $product->is_taxable ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_taxable">Is Taxable</label>
                             </div>
                         </div>

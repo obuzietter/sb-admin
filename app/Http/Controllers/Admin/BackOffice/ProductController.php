@@ -19,8 +19,7 @@ class ProductController extends Controller
     {
         //return view with all products
         $products = Product::all();
-        return view('admin.products.index', compact('products'));               
-
+        return view('admin.products.index', compact('products'));
     }
     /**
      * Show the form for creating a new resource.
@@ -28,10 +27,10 @@ class ProductController extends Controller
     public function create()
     {
         //return view with generated sku, taxes, brands and form to create a new product
-        do{
+        do {
             $sku = strtoupper("sku") . '-' . date("Ymd") . '-' . str_pad(rand(1, 999), 4, "0", STR_PAD_LEFT);
-        }while(Product::where('sku', $sku)->exists());
-        
+        } while (Product::where('sku', $sku)->exists());
+
 
         $taxes = Tax::all();
         $brands = Brand::all();
@@ -53,7 +52,7 @@ class ProductController extends Controller
             'name'            => 'required|string|max:191',
             'description'     => 'nullable|string',
             'content'         => 'nullable|string',
-        
+
             // Pricing & Inventory
             'quantity'                => 'nullable|integer|min:0',
             'minimum_order_quantity'  => 'nullable|integer|min:0',
@@ -67,42 +66,42 @@ class ProductController extends Controller
             'sale_start_date'         => 'nullable|date',
             'sale_end_date'           => 'nullable|date|after_or_equal:sale_start_date',
             'sale_criteria'           => 'nullable|in:NONE,DATE,QUANTITY',
-        
+
             // Product Status
             'is_published'                => 'boolean',
             'is_enabled'                  => 'boolean',
             'is_featured'                 => 'boolean',
             'generate_license_code'       => 'boolean',
             'allow_checkout_when_out_of_stock' => 'boolean',
-        
+
             // Tax Information
             'is_taxable'      => 'boolean',
             'tax_id'          => 'nullable|exists:taxes,id',
-        
+
             // Category & Brand
             'category_id'     => 'nullable|exists:categories,id',
             'brand_id'        => 'nullable|exists:brands,id',
             'supplier_id'     => 'nullable|exists:suppliers,id',
-        
+
             // Product Details
             'product_type'    => 'required|in:PHYSICAL,DIGITAL',
             'barcode'         => 'nullable|string|max:50',
-        
+
             // Dimensions & Weight
             'length'          => 'nullable|numeric|min:0',
             'width'           => 'nullable|numeric|min:0',
             'height'          => 'nullable|numeric|min:0',
             'weight'          => 'nullable|numeric|min:0',
-        
+
             // Media
             'image'           => 'nullable|string|max:191',
             'images'          => 'nullable|string',
         ]);
-        
-    
+
+
         // Store product in database
         $product = Product::create($validatedData);
-    
+
         return redirect()->route('admin.products.create')->with('success', 'Product Created Successfully!');
     }
 
@@ -127,8 +126,6 @@ class ProductController extends Controller
         $suppliers = Supplier::all();
 
         return view('admin.products.edit', compact('product', 'taxes', 'brands', 'categories', 'suppliers'));
-
-
     }
 
     /**
@@ -139,37 +136,64 @@ class ProductController extends Controller
         // Update the product in the database
         $product = Product::findOrFail($id);
         $validatedData = $request->validate([
-            // 'sku' => 'required|string|max:191|unique:products,sku,' . $product->id,
-            'name' => 'required|string|max:191',
+            // General Information
+            'name'        => 'required|string|max:191',
             'description' => 'nullable|string',
-            'content' => 'nullable|string',
-            'is_published' => 'boolean',
-            'quantity' => 'nullable|integer|min:0',
+            'content'     => 'nullable|string',
+
+            // Product Status
+            'is_published'                  => 'boolean',
+            'is_enabled'                    => 'boolean',
+            'is_featured'                   => 'boolean',
+            'generate_license_code'         => 'boolean',
             'allow_checkout_when_out_of_stock' => 'boolean',
-            'is_featured' => 'boolean',
-            'brand_id' => 'nullable|exists:brands,id',
-            'cost' => 'nullable|numeric|min:0',
-            'price' => 'nullable|numeric|min:0',
-            'sale_price' => 'nullable|numeric|min:0',
-            'sale_start_date' => 'nullable|date',
-            'sale_end_date' => 'nullable|date|after_or_equal:sale_start_date',
-            'length' => 'nullable|numeric|min:0',
-            'width' => 'nullable|numeric|min:0',
-            'height' => 'nullable|numeric|min:0',
-            'weight' => 'nullable|numeric|min:0',
-            'tax_id' => 'nullable|exists:taxes,id',
-            'image' => 'nullable|string|max:191',
-            'images' => 'nullable|string',
-            'product_type' => 'required|in:PHYSICAL,DIGITAL',
-            'barcode' => 'nullable|string|max:50',
-            'generate_license_code' => 'boolean',
-            'minimum_order_quantity' => 'integer|min:0',
-            'maximum_order_quantity' => 'integer|min:0',
+            'is_taxable'                    => 'boolean',
+
+            // Pricing & Inventory
+            'quantity'                => 'nullable|integer|min:0',
+            'minimum_order_quantity'  => 'nullable|integer|min:0',
+            'maximum_order_quantity'  => 'nullable|integer|min:0',
+            'threshold'               => 'nullable|integer|min:0',
+            'cost'                    => 'nullable|numeric|min:0',
+            'price'                   => 'nullable|numeric|min:0',
+            'special_price'           => 'nullable|numeric|min:0',
+            'whole_sale_price'        => 'nullable|numeric|min:0',
+            'sale_price'              => 'nullable|numeric|min:0',
+            'sale_start_date'         => 'nullable|date',
+            'sale_end_date'           => 'nullable|date|after_or_equal:sale_start_date',
+            'sale_criteria'           => 'nullable|in:NONE,DATE,QUANTITY',
+
+            // Product Details
+            'product_type'            => 'required|in:PHYSICAL,DIGITAL',
+            'barcode'                 => 'nullable|string|max:50',
+            'tax_id'                  => 'nullable|exists:taxes,id',
+
+            // Dimensions & Weight
+            'length'                  => 'nullable|numeric|min:0',
+            'width'                   => 'nullable|numeric|min:0',
+            'height'                  => 'nullable|numeric|min:0',
+            'weight'                  => 'nullable|numeric|min:0',
+
+            // Media
+            'image'                   => 'nullable|string|max:191',
+            'images'                  => 'nullable|string',
+
+            // Category & Brand & Supplier
+            'category_id'             => 'nullable|exists:categories,id',
+            'brand_id'                => 'nullable|exists:brands,id',
+            'supplier_id'             => 'nullable|exists:suppliers,id',
         ]);
 
+        $validatedData['is_published'] = $request->has('is_published')?? false;
+        $validatedData['is_enabled'] = $request->has('is_enabled')?? false;
+        $validatedData['is_featured'] = $request->has('is_featured')?? false;
+        $validatedData['generate_license_code'] = $request->has('generate_license_code')?? false;
+        $validatedData['allow_checkout_when_out_of_stock'] = $request->has('allow_checkout_when_out_of_stock')?? false;
+        $validatedData['is_taxable'] = $request->has('is_taxable')?? false;
+        
         $product->update($validatedData);
 
-        return redirect()->route('admin.products.create')->with('success', 'Product Updated Successfully!');
+        return redirect()->route('admin.products')->with('success', 'Product Updated Successfully!');
     }
 
     /**
