@@ -47,7 +47,7 @@
                                 <!-- SKU -->
                                 <div class="col-md-6 mb-3">
                                     <label for="sku" class="form-label">SKU</label>
-                                    <input type="text" class="form-control" id="sku" name="sku"
+                                    <input type="text" class="form-control text-primary" id="sku" name="sku"
                                         value="{{ $sku }}" readonly required>
                                 </div>
                                 <!-- Name -->
