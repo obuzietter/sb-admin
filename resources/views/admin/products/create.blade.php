@@ -354,24 +354,26 @@
                             <!-- Image -->
                             <div class="mb-3">
                                 <label for="image" class="form-label">Image</label>
-                                <input type="text" class="form-control" id="image" name="image" value="{{ old('image') }}">
+                                <input type="text" class="form-control" id="image" name="image"
+                                    value="{{ old('image') }}">
                             </div>
                             <!-- Images -->
                             <div class="mb-3">
                                 <label for="images" class="form-label">Images</label>
-                                <input type="text" class="form-control" id="images" name="images" value="{{ old('images') }}">
+                                <input type="text" class="form-control" id="images" name="images"
+                                    value="{{ old('images') }}">
                             </div>
                         </div>
+                    </div>
                 </div>
-        </div>
 
-        <!-- Submit Button -->
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-        </form>
+                <!-- Submit Button -->
+                <div class="row justify-content-end">
+                    <button type="submit" class="btn btn-primary col-3"><i class="fa-solid fa-right-to-bracket"></i> Create Product</button>
+                </div>
+            </form>
 
-    </div>
+        </div>
     </div>
 
 @endsection
