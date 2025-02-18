@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\BackOffice;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -36,9 +37,18 @@ class BrandController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:191',
             'description' => 'nullable|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // 2MB max
         ]);
         
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('brands', 'public');
+        } else {
+            $imagePath = null;
+        }
+        
+        $validatedData['image'] = $imagePath;
+
         // create a new brand
         $brand = Brand::create($validatedData);
 
@@ -71,7 +81,34 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+
+        // validate the request and update the brand
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:191',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // 2MB max
+        ]);
+
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            #delete existing path and image
+            if ($brand->image) {
+                Storage::disk('public')->delete($brand->image);
+
+            }
+
+            $imagePath = $request->file('image')->store('brands', 'public');          
+
+            $validatedData['image'] = $imagePath;
+        } 
+
+
+        // update the brand
+        $brand->update($validatedData);
+
+        // redirect to the index page
+        return redirect()->route('admin.brands')->with('success', 'Brand updated successfully');
     }
 
     /**

@@ -47,21 +47,26 @@
             <!-- Brand Description -->
             <div class="mb-3">
                 <label for="description" class="form-label">Brand Description</label>
-                <textarea class="form-control" id="description" name="description"
-                    rows="3">{{ $brand->description }}</textarea>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ $brand->description }}</textarea>
             </div>
 
             <!-- Brand Image -->
-            <div class="mb-3">
-                <label for="image" class="form-label">Brand Image</label>
-                <input class="form-control" type="text" id="image" name="image" value="{{ $brand->image }}">
-            </div>
-            
 
-            <!-- Submit Button -->
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-            </div>
+            <div class="row">
+
+                <div class="col mb-3">
+                    <label for="image" class="form-label">Brand Image</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                </div>
+                {{-- image preview --}}
+                <div class="col mb-3">
+                    <img src="{{ asset('storage/' . $brand->image) }}" class="img-thumbnail" alt="Brand Image" width="200">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
         </form>
     </div>
 @endsection

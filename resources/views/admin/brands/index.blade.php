@@ -47,8 +47,8 @@
             <table class="" id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>ID</th>
+                        
+                        <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Image</th>
@@ -57,8 +57,8 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th></th>
-                        <th>ID</th>
+                        
+                        <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Image</th>
@@ -68,12 +68,13 @@
                 <tbody>
                     @forelse($brands as $brand)
                         <tr>
-                            <td><input type="checkbox" value="{{ $brand->id }}"></td>
-                            <td>{{ $brand->id }}</td>
+                            
+                            
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $brand->name }}</td>
                             <td>{{ $brand->description }}</td>
-                            <td>{{ $brand->image }}</td>
-                            
+                            <td><img src="{{ asset('storage/' . $brand->image) }}" alt="{{ $brand->name }}" width="50px"></td>
+
                             <td>
                                 <a href="{{ route('admin.brands.edit', $brand->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>

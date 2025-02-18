@@ -52,12 +52,12 @@
 
                 <!-- Brand Image -->
                 <div class="mb-3">
-                    <label for="image" class="form-label">Brand Image</label>
-                    <input class="form-control" type="text" id="image" name="image">
+                    <label for="image" class="form-label fw-bold">Brand Image</label>
+                    <input type="file" name="image" id="image" class="form-control">
                 </div>
 
 
-                
+
                 <!-- Submit Button -->
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-lg">Create Product</button>
