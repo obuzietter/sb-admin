@@ -46,35 +46,59 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
         $validatedData = $request->validate([
-            'sku' => 'required|string|max:191|unique:products,sku',
-            'name' => 'required|string|max:191',
-            'description' => 'nullable|string',
-            'content' => 'nullable|string',
-            'is_published' => 'boolean',
-            'quantity' => 'nullable|integer|min:0',
+            // General Information
+            'sku'             => 'required|string|max:191|unique:products,sku',
+            'name'            => 'required|string|max:191',
+            'description'     => 'nullable|string',
+            'content'         => 'nullable|string',
+        
+            // Pricing & Inventory
+            'quantity'                => 'nullable|integer|min:0',
+            'minimum_order_quantity'  => 'nullable|integer|min:0',
+            'maximum_order_quantity'  => 'nullable|integer|min:0',
+            'threshold'               => 'nullable|integer|min:0',
+            'cost'                    => 'nullable|numeric|min:0',
+            'price'                   => 'nullable|numeric|min:0',
+            'special_price'           => 'nullable|numeric|min:0',
+            'whole_sale_price'        => 'nullable|numeric|min:0',
+            'sale_price'              => 'nullable|numeric|min:0',
+            'sale_start_date'         => 'nullable|date',
+            'sale_end_date'           => 'nullable|date|after_or_equal:sale_start_date',
+            'sale_criteria'           => 'nullable|in:NONE,DATE,QUANTITY',
+        
+            // Product Status
+            'is_published'                => 'boolean',
+            'is_enabled'                  => 'boolean',
+            'is_featured'                 => 'boolean',
+            'generate_license_code'       => 'boolean',
             'allow_checkout_when_out_of_stock' => 'boolean',
-            'is_featured' => 'boolean',
-            'brand_id' => 'nullable|exists:brands,id',
-            'cost' => 'nullable|numeric|min:0',
-            'price' => 'nullable|numeric|min:0',
-            'sale_price' => 'nullable|numeric|min:0',
-            'sale_start_date' => 'nullable|date',
-            'sale_end_date' => 'nullable|date|after_or_equal:sale_start_date',
-            'length' => 'nullable|numeric|min:0',
-            'width' => 'nullable|numeric|min:0',
-            'height' => 'nullable|numeric|min:0',
-            'weight' => 'nullable|numeric|min:0',
-            'tax_id' => 'nullable|exists:taxes,id',
-            'image' => 'nullable|string|max:191',
-            'images' => 'nullable|string',
-            'product_type' => 'required|in:PHYSICAL,DIGITAL',
-            'barcode' => 'nullable|string|max:50',
-            'generate_license_code' => 'boolean',
-            'minimum_order_quantity' => 'integer|min:0',
-            'maximum_order_quantity' => 'integer|min:0',
+        
+            // Tax Information
+            'is_taxable'      => 'boolean',
+            'tax_id'          => 'nullable|exists:taxes,id',
+        
+            // Category & Brand
+            'category_id'     => 'nullable|exists:categories,id',
+            'brand_id'        => 'nullable|exists:brands,id',
+            'supplier_id'     => 'nullable|exists:suppliers,id',
+        
+            // Product Details
+            'product_type'    => 'required|in:PHYSICAL,DIGITAL',
+            'barcode'         => 'nullable|string|max:50',
+        
+            // Dimensions & Weight
+            'length'          => 'nullable|numeric|min:0',
+            'width'           => 'nullable|numeric|min:0',
+            'height'          => 'nullable|numeric|min:0',
+            'weight'          => 'nullable|numeric|min:0',
+        
+            // Media
+            'image'           => 'nullable|string|max:191',
+            'images'          => 'nullable|string',
         ]);
+        
     
         // Store product in database
         $product = Product::create($validatedData);
