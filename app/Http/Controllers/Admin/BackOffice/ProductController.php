@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\BackOffice;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Brand;
+use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Admin\Supplier;
 use App\Models\Admin\Tax;
 use Illuminate\Http\Request;
 
@@ -33,8 +35,10 @@ class ProductController extends Controller
 
         $taxes = Tax::all();
         $brands = Brand::all();
+        $categories = Category::all();
+        $suppliers = Supplier::all();
 
-        return view('admin.products.create', compact('taxes', 'brands', 'sku'));
+        return view('admin.products.create', compact('taxes', 'brands', 'sku', 'categories', 'suppliers'));
     }
 
     /**
