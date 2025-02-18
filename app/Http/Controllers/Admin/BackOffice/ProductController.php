@@ -123,8 +123,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $taxes = Tax::all();
         $brands = Brand::all();
+        $categories = Category::all();
+        $suppliers = Supplier::all();
 
-        return view('admin.products.edit', compact('product', 'taxes', 'brands'));
+        return view('admin.products.edit', compact('product', 'taxes', 'brands', 'categories', 'suppliers'));
 
 
     }
