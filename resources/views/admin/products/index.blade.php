@@ -83,10 +83,10 @@
                                 <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                                 <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
-                                    class="delete-form d-inline">
+                                    class="delete-form d-inline" id="{{ $product->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deleteProduct()">
+                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deleteProduct({{ $product->id }})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -107,7 +107,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function deleteProduct() {
+        function deleteProduct(productID) {
             //prevent the form from submitting
             event.preventDefault();
             Swal.fire({
@@ -120,7 +120,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.querySelector('.delete-form').submit();
+                    document.getElementById(productID).submit();
                 }
             })        
 

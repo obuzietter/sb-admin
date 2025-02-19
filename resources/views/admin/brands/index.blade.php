@@ -47,7 +47,7 @@
             <table class="" id="datatablesSimple">
                 <thead>
                     <tr>
-                        
+
                         <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -57,7 +57,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        
+
                         <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -68,21 +68,22 @@
                 <tbody>
                     @forelse($brands as $brand)
                         <tr>
-                            
-                            
+
+
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $brand->name }}</td>
                             <td>{{ $brand->description }}</td>
-                            <td><img src="{{ asset('storage/' . $brand->image) }}" alt="{{ $brand->name }}" width="50px"></td>
+                            <td><img src="{{ asset('storage/' . $brand->image) }}" alt="{{ $brand->name }}" width="50px">
+                            </td>
 
                             <td>
                                 <a href="{{ route('admin.brands.edit', $brand->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                                 <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="POST"
-                                    class="delete-form d-inline">
+                                    class="delete-form d-inline" id="{{ $brand->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deletebrand()">
+                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deletebrand({{ $brand->id }})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -103,9 +104,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function deletebrand() {
-            //prevent the form from submitting
-            event.preventDefault();
+        function deletebrand(catID) {
+            event.preventDefault(); // Prevent form submission
+            
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -116,10 +117,13 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.querySelector('.delete-form').submit();
+                    
+                    console.log('Delete button clicked');
+                    console.log(catID);
+                    console.log(document.getElementById(catID));
+                    document.getElementById(catID).submit();                                       
                 }
-            })
-
+            });
         }
     </script>
 

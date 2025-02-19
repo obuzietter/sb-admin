@@ -61,8 +61,9 @@
                     <select name="parent_id" id="parent_id" class="form-select">
                         <option value="">None</option>
                         @foreach ($categories as $parent_category)
-                            <option value="{{ $parent_category->id }}" {{ $category->parent_id == $parent_category->id ? 'selected' : '' }}> 
-                                {{ $parent_category->name }}                                 
+                            <option value="{{ $parent_category->id }}"
+                                {{ $category->parent_id == $parent_category->id ? 'selected' : '' }}>
+                                {{ $parent_category->name }}
                             </option>
                         @endforeach
                     </select>
@@ -97,10 +98,18 @@
                 <legend class="fw-bold text-danger">Additional Settings</legend>
 
 
-                <div class="mb-3">
-                    <label for="image" class="form-label fw-bold">Category Image</label>
-                    <input type="file" name="image" id="image" class="form-control">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="image" class="form-label fw-bold">Category Image</label>
+                        <input type="file" name="image" id="image" class="form-control">
+                    </div>
+                    {{-- image preview --}}
+                    <div class="col mb-3">
+                        <img src="{{ asset('storage/' . $category->image_url) }}" alt="{{ $category->name }}"
+                            class="img-thumbnail" style="width: 200px;">
+                    </div>
                 </div>
+
 
                 <div class="mb-3 form-check">
                     <input type="checkbox" name="is_active" id="is_active" class="form-check-input" value="1"

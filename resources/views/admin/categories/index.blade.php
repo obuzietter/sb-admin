@@ -95,10 +95,10 @@
                                 <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                                 <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
-                                    class="delete-form d-inline">
+                                    class="delete-form d-inline" id="{{ $category->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" data-name="{{ $category->name }}" onclick="deleteCategory()">
+                                    <button type="submit" class="btn btn-danger delete-btn" data-name="{{ $category->name }}" onclick="deleteCategory({{ $category->id }})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -119,7 +119,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function deleteCategory() {
+        function deleteCategory(category_id) {
             //prevent the form from submitting
             event.preventDefault();
             Swal.fire({
@@ -132,9 +132,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log(event.target.getAttribute('data-name') + " is deleted");
-                    
-                    document.querySelector('.delete-form').submit();
+                    document.getElementById(category_id).submit();
                 }
             })
 
