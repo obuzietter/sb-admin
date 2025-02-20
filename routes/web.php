@@ -6,6 +6,11 @@ use App\Models\Admin\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+
+Route::get('/', function () {
+    return redirect()->route('admin.dashboard');
+});
+
 Route::get('/sku-update', function () {
    
     // Fetch products without an SKU
