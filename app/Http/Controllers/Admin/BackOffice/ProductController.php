@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         //return view with all products
-        $products = Product::paginate(20); // Fetches only 20 products per request
+        $products = Product::orderBy('name')->paginate(20); // Fetches only 20 products per request
         
         return view('admin.products.index', compact('products'));
     }
