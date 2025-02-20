@@ -2,6 +2,7 @@
 
 require __DIR__ . '/admin.php';
 
+use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,23 @@ use Illuminate\Support\Str;
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 });
+
+
+// Generate slug if not provided
+// Route::get('/slug-generate', function () {
+
+//     $categories = Category::all();
+
+//     foreach ($categories as $cat) {
+//         $slug = Str::slug($cat->name);
+//         $cat->slug = $slug;
+//         $cat->save();
+//     }
+
+//     return 'Slug generated successfully';
+// });
+
+
 
 // Route::get('/sku-update', function () {
    

@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //return view with all categories
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
 
         return view('admin.categories.index')->with('categories', $categories);
     }
