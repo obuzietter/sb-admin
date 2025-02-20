@@ -47,7 +47,7 @@
             <table class="" id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th></th>
+                        
                         <th>SKU</th>
                         <th>Name</th>
                         <th>Quantity</th>
@@ -59,7 +59,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th></th>
+                        
                         <th>SKU</th>
                         <th>Name</th>
                         <th>Quantity</th>
@@ -72,7 +72,7 @@
                 <tbody>
                     @forelse($products as $product)
                         <tr>
-                            <td><input type="checkbox" value="{{ $product->id }}"></td>
+                            
                             <td>{{ $product->sku }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->quantity }}</td>
