@@ -84,6 +84,7 @@
                         <th>Parent ID</th>
                         <th></th>
                     </tr>
+                    <td colspan="7">{{ $categories->links('pagination::bootstrap-5') }}</td>
                 </tfoot>
                 <tbody>
                     {{-- @dd($categories) --}}
