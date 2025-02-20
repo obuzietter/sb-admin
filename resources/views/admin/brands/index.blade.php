@@ -33,18 +33,32 @@
 
 
     <div class="card mb-4">
-        <div class="card-header d-flex justify-content-end align-items-center">
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+                <!-- Table Operations -->
+                <a href="{{ route('admin.brands.create') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add Brand
+                </a>
+                <a href="" class="btn btn-warning">
+                    <i class="fa-solid fa-file-export"></i> Export
+                </a>
+                <a href="" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete Bulk
+                </a>
+            </div>
 
-            {{-- table operations --}}
-            <a href="{{ route('admin.brands.create') }}" class="btn btn-primary mx-1"><i class="fa-solid fa-plus"></i> Add
-                Brand</a>
-            <a href="" class="btn btn-warning mx-1"><i class="fa-solid fa-sheet-plastic"></i>Export</a>
-            <a href="" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>Delete Bulk</a>
-
-
+            <!-- Search Field -->
+            <form action="{{ route('admin.brands.search') }}" method="GET" class="d-flex gap-2 align-items-center">
+                <input type="search" name="search" class="form-control" placeholder="Search by name or slug"
+                    value="{{ request('search') }}" style="min-width: 200px;">
+                <button class="btn btn-outline-success d-flex align-items-center gap-1" type="submit">
+                    <i class="fa-solid fa-search"></i> Search
+                </button>
+            </form>
         </div>
+
         <div class="card-body">
-            <table class="" id="datatablesSimple">
+            <table class="table table-sm table-hover">
                 <thead>
                     <tr>
 

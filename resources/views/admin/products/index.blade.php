@@ -29,10 +29,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-
-
-
-    <div class="card mb-4" >
+    <div class="card mb-4">
         <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
             <div class="d-flex gap-2">
                 <!-- Table Operations -->
@@ -46,7 +43,7 @@
                     <i class="fa-solid fa-trash"></i> Delete Bulk
                 </a>
             </div>
-        
+
             <!-- Search Field -->
             <form action="{{ route('admin.products.search') }}" method="GET" class="d-flex gap-2 align-items-center">
                 <input type="search" name="search" class="form-control" placeholder="Search by name or SKU"
@@ -56,9 +53,9 @@
                 </button>
             </form>
         </div>
-        
+
         <div class="card-body">
-            <table class="table table-sm table-hover" style="overflow-x: auto;">
+            <table class="table table-sm table-hover">
                 <thead>
                     <tr>
 
@@ -69,11 +66,11 @@
                         <th>Price</th>
                         <th>Special Price</th>
                         <th>Wholesale Price</th>
-                        
+
                         <th>Is Published</th>
                         <th>Is Enabled</th>
                         <th>Is Featured</th>
-                      
+
                         <th>Operations</th>
 
                     </tr>
@@ -87,11 +84,11 @@
                         <th>Price</th>
                         <th>Special Price</th>
                         <th>Wholesale Price</th>
-                        
+
                         <th>Is Published</th>
                         <th>Is Enabled</th>
                         <th>Is Featured</th>
-                      
+
                         <th>Operations</th>
                     </tr>
                     <tr>
@@ -109,36 +106,32 @@
                             <td>{{ $product->price }}</td>
                             <td>{{ $product->special_price }}</td>
                             <td>{{ $product->whole_sale_price }}</td>
-                            
+
                             <td>
                                 @if ($product->is_published == 1)
-                                    <span class="badge badge-success" style="color: rgb(0, 186, 0); font-size: 1rem">YES</span>
+                                    <span class="badge badge-success bg-success">YES</span>
                                 @else
-                                    <span class="badge badge-danger" style="color: rgb(254, 30, 30); font-size: 1rem">NO</span>
+                                    <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
+                                       
                             </td>
                             <td>
                                 @if ($product->is_enabled == 1)
-                                    <span class="badge badge-success"
-                                        style="color: rgb(0, 186, 0); font-size: 1rem">YES</span>
+                                <span class="badge badge-success bg-success">YES</span>
                                 @else
-                                    <span class="badge badge-danger"
-                                        style="color: rgb(254, 30, 30); font-size: 1rem">NO</span>
+                                    <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($product->is_featured == 1)
-                                    <span class="badge badge-success"
-                                        style="color: rgb(0, 186, 0); font-size: 1rem">YES</span>
+                                <span class="badge badge-success bg-success">YES</span>
                                 @else
-                                    <span class="badge badge-danger"
-                                        style="color: rgb(254, 30, 30); font-size: 1rem">NO</span>
+                                    <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
                             </td>
-                            
 
-                            <td class="">
-                               
+                            <td>
+
                                 <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                                 <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
@@ -154,7 +147,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="bg-warning fs-5" colspan="7">No products found</td>
+                            <td colspan="7">No products found</td>
                         </tr>
                     @endforelse
 

@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function () {
         Route::get('brands/{brand}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
         Route::put('brands/{brand}', [BrandController::class, 'update'])->name('admin.brands.update');
         Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
+        Route::get('brand-search', [BrandController::class, 'search'])->name('admin.brands.search');
 
         #category routes
         Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
@@ -59,7 +60,7 @@ Route::prefix('admin')->group(function () {
         Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
         Route::put('categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
-        #route to update the category order
+        Route::get('category-search', [CategoryController::class, 'search'])->name('admin.categories.search');
         Route::post('categories/update-order', [CategoryController::class, 'updateOrder'])->name('admin.categories.updateOrder');
         
     });

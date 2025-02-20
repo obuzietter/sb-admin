@@ -216,4 +216,17 @@ class CategoryController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Search for categories
+     */
+    public function search(Request $request)
+    {
+        // Search for a category
+        $categories = Category::where('name', 'like', '%' . $request->search . '%')
+            ->orWhere('slug', 'like', '%' . $request->search . '%')
+            ->paginate(20); // Fetches only 20 categories per request
+
+        return view('admin.categories.index', compact('categories'));
+    }   
 }

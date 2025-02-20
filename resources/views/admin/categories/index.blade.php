@@ -33,21 +33,35 @@
 
 
     <div class="card mb-4">
-        <div class="card-header d-flex justify-content-end align-items-center">
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+                <!-- Table Operations -->
+                <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add Category
+                </a>
+                <a href="" class="btn btn-warning">
+                    <i class="fa-solid fa-file-export"></i> Export
+                </a>
+                <a href="" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete Bulk
+                </a>
+            </div>
 
-            {{-- table operations --}}
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary mx-1"><i class="fa-solid fa-plus"></i>
-                Add Category</a>
-            <a href="" class="btn btn-warning mx-1"><i class="fa-solid fa-sheet-plastic"></i>Export</a>
-            <a href="" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>Delete Bulk</a>
-
-
+            <!-- Search Field -->
+            <form action="{{ route('admin.categories.search') }}" method="GET" class="d-flex gap-2 align-items-center">
+                <input type="search" name="search" class="form-control" placeholder="Search by name or slug"
+                    value="{{ request('search') }}" style="min-width: 200px;">
+                <button class="btn btn-outline-success d-flex align-items-center gap-1" type="submit">
+                    <i class="fa-solid fa-search"></i> Search
+                </button>
+            </form>
         </div>
+
         <div class="card-body">
-            <table class="" id="datatablesSimple">
+            <table class="table table-sm table-hover">
                 <thead>
                     <tr>
-                        <th></th>
+                        
                         <th>Name</th>
                         <th>Slug</th>
                         {{-- <th>Description</th> --}}
@@ -60,7 +74,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th></th>
+                        
                         <th>Name</th>
                         <th>Slug</th>
                         {{-- <th>Description</th> --}}
@@ -75,7 +89,7 @@
                     {{-- @dd($categories) --}}
                     @forelse($categories as $category)
                         <tr>
-                            <td><input type="checkbox" value="{{ $category->id }}"></td>
+                            
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
                             {{-- <td>{{ $category->description }}</td> --}}
@@ -84,9 +98,9 @@
                             <td>{{ $category->display_order }}</td>
                             <td>
                                 @if($category->is_active == 1)
-                                    <span class="badge badge-success" style="color: rgb(0, 186, 0); font-size: 1rem">YES</span>
+                                    <span class="badge badge-success bg-success">YES</span>
                                 @else
-                                    <span class="badge badge-danger" style="color: rgb(254, 30, 30); font-size: 1rem">NO</span>
+                                    <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
                             </td>
                             

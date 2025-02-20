@@ -126,4 +126,17 @@ class BrandController extends Controller
         // redirect to the index page
         return redirect()->route('admin.brands')->with('success',  $brand->name . ' deleted successfully');
     }
+
+    /**
+     * Search for a brand
+     */
+    public function search(Request $request)
+    {
+        // search for a brand
+        $search = $request->input('search');
+        $brands = Brand::where('name', 'like', '%' . $search . '%')->get();
+
+        // return view with the search results
+        return view('admin.brands.index', compact('brands'));
+    }
 }
