@@ -42,6 +42,7 @@ Route::prefix('admin')->group(function () {
         Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
         Route::put('products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
         Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+        Route::get('product-search', [ProductController::class, 'search'])->name('admin.products.search');
 
         #brand routes
         Route::get('brands', [BrandController::class, 'index'])->name('admin.brands');

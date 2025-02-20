@@ -33,21 +33,35 @@
 
 
     <div class="card mb-4">
-        <div class="card-header d-flex justify-content-end align-items-center">
-
-            {{-- table operations --}}
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary mx-1"><i class="fa-solid fa-plus"></i> Add
-                Product</a>
-            <a href="" class="btn btn-warning mx-1"><i class="fa-solid fa-sheet-plastic"></i>Export</a>
-            <a href="" class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>Delete Bulk</a>
-
-
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+                <!-- Table Operations -->
+                <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add Product
+                </a>
+                <a href="" class="btn btn-warning">
+                    <i class="fa-solid fa-file-export"></i> Export
+                </a>
+                <a href="" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete Bulk
+                </a>
+            </div>
+        
+            <!-- Search Field -->
+            <form action="{{ route('admin.products.search') }}" method="GET" class="d-flex gap-2 align-items-center">
+                <input type="search" name="search" class="form-control" placeholder="Search by name or SKU"
+                    value="{{ request('search') }}" style="min-width: 200px;">
+                <button class="btn btn-outline-success d-flex align-items-center gap-1" type="submit">
+                    <i class="fa-solid fa-search"></i> Search
+                </button>
+            </form>
         </div>
+        
         <div class="card-body">
-            <table class="" id="datatablesSimple">
+            <table class="table table-hover">
                 <thead>
                     <tr>
-                        
+
                         <th>SKU</th>
                         <th>Name</th>
                         <th>Quantity</th>
@@ -59,7 +73,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        
+
                         <th>SKU</th>
                         <th>Name</th>
                         <th>Quantity</th>
@@ -68,11 +82,14 @@
                         <th>Product Type</th>
                         <th></th>
                     </tr>
+                    <tr>
+                        <td colspan="7">{{ $products->links('pagination::bootstrap-5') }}</td>
+                    </tr>
                 </tfoot>
                 <tbody>
                     @forelse($products as $product)
                         <tr>
-                            
+
                             <td>{{ $product->sku }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->quantity }}</td>
@@ -86,7 +103,8 @@
                                     class="delete-form d-inline" id="{{ $product->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deleteProduct({{ $product->id }})">
+                                    <button type="submit" class="btn btn-danger delete-btn"
+                                        onclick="deleteProduct({{ $product->id }})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -122,13 +140,10 @@
                 if (result.isConfirmed) {
                     document.getElementById(productID).submit();
                 }
-            })        
+            })
 
         }
-
-       
-            
     </script>
 
-    
+
 @endsection

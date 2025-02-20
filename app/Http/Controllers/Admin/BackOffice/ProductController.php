@@ -18,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         //return view with all products
-        $products = Product::all();
+        $products = Product::paginate(20); // Fetches only 20 products per request
+        
         return view('admin.products.index', compact('products'));
     }
     /**
@@ -206,5 +207,21 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin.products')->with('success', 'Product Deleted Successfully!');
+    }
+
+    /**
+     * Search for a product
+     */
+    public function search(Request $request)
+    {
+        // Search for a product
+        $products = Product::where('name', 'like', '%' . $request->search . '%')
+            ->orWhere('sku', 'like', '%' . $request->search . '%')
+            ->paginate(20); // Fetches only 20 products per request
+
+            
+        return view('admin.products.index', compact('products'));
+
+        
     }
 }
