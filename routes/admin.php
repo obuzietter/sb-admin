@@ -4,6 +4,10 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\BackOffice\BrandController;
 use App\Http\Controllers\Admin\BackOffice\CategoryController;
 use App\Http\Controllers\Admin\BackOffice\ProductController;
+use App\Models\Admin;
+use App\Models\Admin\Brand;
+use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', function () {
@@ -22,17 +26,21 @@ Route::prefix('admin')->group(function () {
         Route::get('register', [AuthController::class, 'showRegister'])->name('show.admin.register');
         Route::post('login', [AuthController::class, 'login'])->name('admin.login');
         Route::post('register', [AuthController::class, 'register'])->name('admin.register');
-       
     });
 
     Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
-  
 
-    
+
+
     Route::middleware('auth:admin')->group(function () {
-       
+
         Route::get('dashboard', function () {
-            return view('admin.dashboard');
+            $products = Product::count();
+            $brands = Brand::count();
+            $categories = Category::count();
+            $admins = Admin::count();
+
+            return view('admin.dashboard', compact('products', 'brands', 'categories', 'admins'));
         })->name('admin.dashboard');
 
         #product routes
@@ -62,6 +70,5 @@ Route::prefix('admin')->group(function () {
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
         Route::get('category-search', [CategoryController::class, 'search'])->name('admin.categories.search');
         Route::post('categories/update-order', [CategoryController::class, 'updateOrder'])->name('admin.categories.updateOrder');
-        
     });
 });
