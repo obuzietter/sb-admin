@@ -113,36 +113,39 @@
                                 @else
                                     <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
-                                       
+
                             </td>
                             <td>
                                 @if ($product->is_enabled == 1)
-                                <span class="badge badge-success bg-success">YES</span>
+                                    <span class="badge badge-success bg-success">YES</span>
                                 @else
                                     <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($product->is_featured == 1)
-                                <span class="badge badge-success bg-success">YES</span>
+                                    <span class="badge badge-success bg-success">YES</span>
                                 @else
                                     <span class="badge badge-danger bg-danger">NO</span>
                                 @endif
                             </td>
 
-                            <td>
+                            <td class="">
 
-                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
-                                    class="delete-form" id="{{ $product->id }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn"
-                                        onclick="deleteProduct({{ $product->id }})">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+
+                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
+                                        class="delete-form" id="{{ $product->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger delete-btn"
+                                            onclick="deleteProduct({{ $product->id }})">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
