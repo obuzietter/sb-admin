@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
+    // return redirect()->route('admin.dashboard');
+    return view('shop.home');
 });
 
 
