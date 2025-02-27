@@ -29,6 +29,15 @@ Route::get('/contact', function () {
     return view('shop.contact');
 })->name('contact');
 
+Route::get('/cart', function () {
+
+    return view('shop.cart');
+})->name('cart');
+
+Route::get('/checkout', function () {
+
+    return view('shop.checkout');
+})->name('checkout');
 
 // Generate slug if not provided
 // Route::get('/slug-generate', function () {
