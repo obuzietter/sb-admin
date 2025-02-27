@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('/', function () {
-    // return redirect()->route('admin.dashboard');
+    
     return view('shop.home');
 });
+
+Route::get('/products', function () {
+    
+    return view('shop.products');
+})->name('products');
 
 
 // Generate slug if not provided
