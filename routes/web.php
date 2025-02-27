@@ -10,14 +10,19 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('/', function () {
-    
+
     return view('shop.home');
-});
+})->name('home');
 
 Route::get('/products', function () {
-    
+
     return view('shop.products');
 })->name('products');
+
+Route::get('/product-detail', function () {
+
+    return view('shop.product-detail');
+})->name('product.show');
 
 
 // Generate slug if not provided
