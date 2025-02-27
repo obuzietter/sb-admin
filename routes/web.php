@@ -24,6 +24,11 @@ Route::get('/product-detail', function () {
     return view('shop.product-detail');
 })->name('product.show');
 
+Route::get('/contact', function () {
+
+    return view('shop.contact');
+})->name('contact');
+
 
 // Generate slug if not provided
 // Route::get('/slug-generate', function () {
