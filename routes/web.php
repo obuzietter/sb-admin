@@ -2,6 +2,7 @@
 
 require __DIR__ . '/admin.php';
 
+use App\Http\Controllers\PagesController;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use Illuminate\Http\Request;
@@ -14,10 +15,7 @@ Route::get('/', function () {
     return view('shop.home');
 })->name('home');
 
-Route::get('/products', function () {
-
-    return view('shop.products');
-})->name('products');
+Route::get('/products', [PagesController::class, 'shop'])->name('products');
 
 Route::get('/product-detail', function () {
 
