@@ -56,7 +56,7 @@
                                             @forelse ($categories as $category)
                                             <li>
                                                 <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i> {{ $category->name }}</a>
+                                                    <a href="#"><i class="bi bi-star-fill"></i> {{ $category->name }}</a>
                                                     <span>(3)</span>
                                                 </div>
                                             </li>
