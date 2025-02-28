@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -10,7 +11,8 @@ class PagesController extends Controller
     public function shop()
     {
         $categories = Category::all();
-        return view('shop.products', compact('categories'));
+        $products = Product::paginate(20);
+        return view('shop.products', compact('categories', 'products'));
         
     }
 

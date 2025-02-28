@@ -72,14 +72,14 @@
     font-weight: normal;
 }
 
-.btn.border-secondary {
+/* .btn.border-secondary {
     transition: 0.5s;
 }
 
 .btn.border-secondary:hover {
     background: var(--bs-secondary) !important;
     color: var(--bs-white) !important;
-}
+} */
 
 /*** Topbar Start ***/
 .fixed-top {
@@ -459,7 +459,7 @@
 
 
 /*** Single Page Start ***/
-.pagination {
+/* .pagination {
     display: inline-block;
 }
   
@@ -478,7 +478,7 @@
     border: 1px solid var(--bs-secondary);
 }
   
-.pagination a:hover:not(.active) {background-color: var(--bs-primary)}
+.pagination a:hover:not(.active) {background-color: var(--bs-primary)} */
 
 .nav.nav-tabs .nav-link.active {
     border-bottom: 2px solid var(--bs-secondary) !important;
