@@ -9,6 +9,7 @@ use App\Models\Admin\Product;
 use App\Models\Admin\Supplier;
 use App\Models\Admin\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -19,7 +20,7 @@ class ProductController extends Controller
     {
         //return view with all products
         $products = Product::orderBy('name')->paginate(20); // Fetches only 20 products per request
-        
+
         return view('admin.products.index', compact('products'));
     }
     /**
@@ -95,10 +96,15 @@ class ProductController extends Controller
             'weight'          => 'nullable|numeric|min:0',
 
             // Media
-            'image'           => 'nullable|string|max:191',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 2MB max
             'images'          => 'nullable|string',
         ]);
 
+        if ($request->hasFile('image')) {
+            $validatedData['image'] = $request->file('image')->store('products', 'public');
+        } else {
+            $validatedData['image'] = null;
+        }
 
         // Store product in database
         $product = Product::create($validatedData);
@@ -176,7 +182,7 @@ class ProductController extends Controller
             'weight'                  => 'nullable|numeric|min:0',
 
             // Media
-            'image'                   => 'nullable|string|max:191',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 2MB max
             'images'                  => 'nullable|string',
 
             // Category & Brand & Supplier
@@ -185,13 +191,23 @@ class ProductController extends Controller
             'supplier_id'             => 'nullable|exists:suppliers,id',
         ]);
 
-        $validatedData['is_published'] = $request->has('is_published')?? false;
-        $validatedData['is_enabled'] = $request->has('is_enabled')?? false;
-        $validatedData['is_featured'] = $request->has('is_featured')?? false;
-        $validatedData['generate_license_code'] = $request->has('generate_license_code')?? false;
-        $validatedData['allow_checkout_when_out_of_stock'] = $request->has('allow_checkout_when_out_of_stock')?? false;
-        $validatedData['is_taxable'] = $request->has('is_taxable')?? false;
-        
+        $validatedData['is_published'] = $request->has('is_published') ?? false;
+        $validatedData['is_enabled'] = $request->has('is_enabled') ?? false;
+        $validatedData['is_featured'] = $request->has('is_featured') ?? false;
+        $validatedData['generate_license_code'] = $request->has('generate_license_code') ?? false;
+        $validatedData['allow_checkout_when_out_of_stock'] = $request->has('allow_checkout_when_out_of_stock') ?? false;
+        $validatedData['is_taxable'] = $request->has('is_taxable') ?? false;
+
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            #delete existing path and image
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            $validatedData['image']  = $request->file('image')->store('brands', 'public');
+        }
+
         $product->update($validatedData);
 
         return redirect()->route('admin.products')->with('success', 'Product Updated Successfully!');
@@ -219,9 +235,7 @@ class ProductController extends Controller
             ->orWhere('sku', 'like', '%' . $request->search . '%')
             ->paginate(20); // Fetches only 20 products per request
 
-            
-        return view('admin.products.index', compact('products'));
 
-        
+        return view('admin.products.index', compact('products'));
     }
 }

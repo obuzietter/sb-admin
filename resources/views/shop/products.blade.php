@@ -191,10 +191,10 @@
                             <div class="row g-4">
 
                                 @forelse ($products as $product)
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-md-6 col-lg-6 col-xl-4 ">
                                         <div class="rounded position-relative fruite-item d-flex flex-column">
                                             <div class="fruite-img">
-                                                <img src="/shop/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top"
+                                                <img src="{{ asset('storage/'.$product->image) }}" class="img-fluid w-100 rounded-top"
                                                     alt="">
                                             </div>
                                             <div class="text-white fw-bold bg-danger px-3 py-1 rounded position-absolute"
@@ -203,8 +203,8 @@
                                                 <h4>{{ $product->name }}</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
                                                     incididunt</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">
+                                                <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
+                                                    <p class="text-primary fs-6 fw-bold mb-0 text-decoration-underline">
                                                         KSH {{ number_format($product->price, 2) }}
                                                     </p>                                                    
                                                     <a href="#"

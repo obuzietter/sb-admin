@@ -354,8 +354,13 @@
                         <!-- Image -->
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="text" class="form-control" id="image" name="image"
-                                value="{{ $product->image }}">
+                            <input type="file" class="form-control" id="image" name="image"
+                                value="">
+                        </div>
+                        {{-- Image Preview --}}
+                        <div class="mb-3">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" class="img-fluid"
+                                style="max-height: 200px;">
                         </div>
                         <!-- Images -->
                         <div class="mb-3">

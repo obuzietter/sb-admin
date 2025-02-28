@@ -354,8 +354,8 @@
                             <!-- Image -->
                             <div class="mb-3">
                                 <label for="image" class="form-label">Image</label>
-                                <input type="text" class="form-control" id="image" name="image"
-                                    value="{{ old('image') }}">
+                                <input type="file" class="form-control" id="image" name="image"
+                                    value="">
                             </div>
                             <!-- Images -->
                             <div class="mb-3">
