@@ -197,8 +197,8 @@
                                                 <img src="/shop/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top"
                                                     alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white fw-bold bg-danger px-3 py-1 rounded position-absolute"
+                                                style="top: 10px; left: 10px;">NEW</div>
                                             <div class="p-4 rounded-bottom border flex-grow-1 d-flex flex-column justify-content-between">
                                                 <h4>{{ $product->name }}</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
