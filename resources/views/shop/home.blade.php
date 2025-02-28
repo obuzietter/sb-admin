@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                            <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
                                 <i class="fas fa-user-shield fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                            <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
                                 <i class="fas fa-exchange-alt fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                            <div class="featurs-icon btn-square rounded-circle bg-primary mb-5 mx-auto">
                                 <i class="fa fa-phone-alt fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
@@ -628,7 +628,7 @@
 
 
         <!-- Banner Section Start-->
-        <div class="container-fluid banner bg-secondary my-5">
+        <div class="container-fluid banner bg-primary my-5">
             <div class="container py-5">
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6">
