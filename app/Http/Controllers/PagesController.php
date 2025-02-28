@@ -11,7 +11,7 @@ class PagesController extends Controller
     public function shop()
     {
         $categories = Category::all();
-        $products = Product::paginate(20);
+        $products = Product::where('is_enabled', 1)->paginate(20);
         return view('shop.products', compact('categories', 'products'));
         
     }
