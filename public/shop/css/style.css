@@ -306,10 +306,12 @@
 
 .fruite .fruite-item {
     height: 100%;
-    transition: 0.5s;
+    transition: 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .fruite .fruite-item:hover {
-    box-shadow: 0 0 55px rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0 0 55px rgba(0, 0, 0, 0.4); */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .fruite .fruite-item .fruite-img {

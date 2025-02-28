@@ -52,14 +52,15 @@
                                     <div class="mb-3">
                                         <h4>Categories</h4>
                                         <ul class="list-unstyled fruite-categorie">
-                                            
+
                                             @forelse ($categories as $category)
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="bi bi-star-fill"></i> {{ $category->name }}</a>
-                                                    <span>(3)</span>
-                                                </div>
-                                            </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#"><i class="bi bi-star-fill"></i>
+                                                            {{ $category->name }}</a>
+                                                        <span>(3)</span>
+                                                    </div>
+                                                </li>
                                             @empty
                                                 <h1>No categories found</h1>
                                             @endforelse
@@ -185,42 +186,43 @@
                             </div>
                         </div>
                         {{-- Product Cards --}}
-                      
+
                         <div class="col-lg-9">
-                            <div class="row g-4 justify-content-center">
-                                
+                            <div class="row g-4">
+
                                 @forelse ($products as $product)
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="/shop/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top"
-                                                alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>{{ $product->name }}</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
-                                                incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item d-flex flex-column">
+                                            <div class="fruite-img">
+                                                <img src="/shop/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top"
+                                                    alt="">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="p-4 rounded-bottom border flex-grow-1 d-flex flex-column justify-content-between">
+                                                <h4>{{ $product->name }}</h4>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
+                                                    incididunt</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <a href="#"
+                                                        class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
+                                                        cart</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @empty
                                     <h1>No products found</h1>
                                 @endforelse
-                              <div class="row">
-                                {{-- {{ $products->links('pagination::bootstrap-5') }} --}}
-                                <div class="mt-5">
-                                    {{ $products->links('pagination::bootstrap-5') }}
+                                <div class="row">
+                                    {{-- {{ $products->links('pagination::bootstrap-5') }} --}}
+                                    <div class="mt-5">
+                                        {{ $products->links('pagination::bootstrap-5') }}
+                                    </div>
+
                                 </div>
-                                
-                              </div>
                             </div>
                         </div>
                     </div>
