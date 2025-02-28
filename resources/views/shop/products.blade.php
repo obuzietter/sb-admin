@@ -204,7 +204,9 @@
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
                                                     incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">
+                                                        KSH {{ number_format($product->price, 2) }}
+                                                    </p>                                                    
                                                     <a href="#"
                                                         class="btn btn-outline-primary rounded-pill px-3"><i
                                                             class="fa fa-shopping-bag me-2"></i> Add to
