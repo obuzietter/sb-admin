@@ -211,11 +211,10 @@
                                                     <span class="text-primary mb-0 text-decoration-underline">
                                                         KSH {{ number_format($product->price, 2) }}
                                                     </span>
-                                                    <a href="#"
-                                                        class="btn btn-primary rounded-pill d-flex align-items-center"
+                                                    <button class="btn btn-primary rounded-pill d-flex align-items-center"
                                                         onclick="notify()">
                                                         <i class="fa fa-shopping-bag me-2"></i> Add to Cart
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -241,8 +240,10 @@
     <!-- Fruits Shop End-->
     <script>
         function notify() {
+
             Toastify({
                 text: "Product added to cart!",
+                className: "rounded-pill",
                 duration: 3000,
                 destination: "/cart",
                 newWindow: false,
@@ -256,7 +257,6 @@
                 },
                 style: {
                     background: "linear-gradient(to right, green, green)",
-                    
                 },
                 onClick: function() {} // Callback after click
             }).showToast();
