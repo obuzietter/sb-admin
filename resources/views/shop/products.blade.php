@@ -199,20 +199,21 @@
                                             </div>
                                             <div class="text-white fw-bold bg-danger px-3 py-1 rounded position-absolute"
                                                 style="top: 10px; left: 10px;">NEW</div>
-                                            <div class="p-4 rounded-bottom border flex-grow-1 d-flex flex-column justify-content-between">
-                                                <h4>{{ $product->name }}</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
-                                                    incididunt</p>
-                                                <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
-                                                    <p class="text-primary fs-6 fw-bold mb-0 text-decoration-underline">
-                                                        KSH {{ number_format($product->price, 2) }}
-                                                    </p>                                                    
-                                                    <a href="#"
-                                                        class="btn btn-outline-primary rounded-pill px-3"><i
-                                                            class="fa fa-shopping-bag me-2"></i> Add to
-                                                        cart</a>
+                                                <div class="p-4 rounded-bottom border shadow-sm flex-grow-1 d-flex flex-column justify-content-between bg-white">
+                                                    <!-- Product Name -->
+                                                    <h5 class="text-dark fw-semibold mb-3">{{ $product->name }}</h5>
+                                                
+                                                    <!-- Price & Cart Button -->
+                                                    <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                                                        <span class="text-primary mb-0 text-decoration-underline">
+                                                            KSH {{ number_format($product->price, 2) }}
+                                                        </span>                                                    
+                                                        <a href="#" class="btn btn-primary rounded-pill d-flex align-items-center">
+                                                            <i class="fa fa-shopping-bag me-2"></i> Add to Cart
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                
                                         </div>
                                     </div>
                                 @empty
