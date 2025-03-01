@@ -186,7 +186,8 @@
                             </div>
                         </div>
                         {{-- Product Cards --}}
-
+                        <link rel="stylesheet" type="text/css"
+                            href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
                         <div class="col-lg-9">
                             <div class="row g-4">
 
@@ -194,26 +195,30 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4 ">
                                         <div class="rounded position-relative fruite-item d-flex flex-column">
                                             <div class="fruite-img">
-                                                <img src="{{ asset('storage/'.$product->image) }}" class="img-fluid w-100 rounded-top"
-                                                    alt="">
+                                                <img src="{{ asset('storage/' . $product->image) }}"
+                                                    class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white fw-bold bg-danger px-3 py-1 rounded position-absolute"
                                                 style="top: 10px; left: 10px;">NEW</div>
-                                                <div class="p-4 rounded-bottom border shadow-sm flex-grow-1 d-flex flex-column justify-content-between bg-white">
-                                                    <!-- Product Name -->
-                                                    <h5 class="text-dark fw-semibold mb-3">{{ $product->name }}</h5>
-                                                
-                                                    <!-- Price & Cart Button -->
-                                                    <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
-                                                        <span class="text-primary mb-0 text-decoration-underline">
-                                                            KSH {{ number_format($product->price, 2) }}
-                                                        </span>                                                    
-                                                        <a href="#" class="btn btn-primary rounded-pill d-flex align-items-center">
-                                                            <i class="fa fa-shopping-bag me-2"></i> Add to Cart
-                                                        </a>
-                                                    </div>
+                                            <div
+                                                class="p-4 rounded-bottom border shadow-sm flex-grow-1 d-flex flex-column justify-content-between bg-white">
+                                                <!-- Product Name -->
+                                                <h5 class="text-dark fw-semibold mb-3">{{ $product->name }}</h5>
+
+                                                <!-- Price & Cart Button -->
+                                                <div
+                                                    class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                                                    <span class="text-primary mb-0 text-decoration-underline">
+                                                        KSH {{ number_format($product->price, 2) }}
+                                                    </span>
+                                                    <a href="#"
+                                                        class="btn btn-primary rounded-pill d-flex align-items-center"
+                                                        onclick="notify()">
+                                                        <i class="fa fa-shopping-bag me-2"></i> Add to Cart
+                                                    </a>
                                                 </div>
-                                                
+                                            </div>
+
                                         </div>
                                     </div>
                                 @empty
@@ -234,4 +239,28 @@
         </div>
     </div>
     <!-- Fruits Shop End-->
+    <script>
+        function notify() {
+            Toastify({
+                text: "Product added to cart!",
+                duration: 3000,
+                destination: "/cart",
+                newWindow: false,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                offset: {
+                    x: 10, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                    y: 50 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                },
+                style: {
+                    background: "linear-gradient(to right, green, green)",
+                    
+                },
+                onClick: function() {} // Callback after click
+            }).showToast();
+        }
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 @endsection
