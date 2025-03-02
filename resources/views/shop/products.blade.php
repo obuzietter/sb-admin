@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Product Cards --}}                        
+                        {{-- Product Cards --}}
                         <div class="col-lg-9">
                             <div class="row g-4">
 
@@ -210,7 +210,7 @@
                                                         KSH {{ number_format($product->price, 2) }}
                                                     </span>
                                                     <button class="btn btn-primary rounded-pill d-flex align-items-center"
-                                                        onclick="addToCart('{{ $product->name }}')">
+                                                        onclick="addToCart({{ $product->id }}, '{{ $product->name }}', '{{ $product->image }}', {{ $product->price }})">
                                                         <i class="fa fa-shopping-bag me-2"></i> Add to Cart
                                                     </button>
                                                 </div>
@@ -237,10 +237,42 @@
     </div>
     <!-- Fruits Shop End-->
     <script>
-        function addToCart(product) {
+        function addToCart(productID, productName, productImage, productPrice, quantity = 1) {
+            console.log(productID, productName, productImage, productPrice, quantity);
 
+            let product = {
+                id: productID,
+                name: productName,
+                image: productImage,
+                price: productPrice,
+                quantity: quantity
+            };
+            // ajax request to add product to cart
+
+            fetch("{{ route('cart.item.store') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        product: product
+                    })
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    showToast();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+
+        }
+
+        function showToast() {
             Toastify({
-                text: product + " added to cart!",
+                text: "Item added to cart!",
                 className: "rounded-pill",
                 duration: 3000,
                 destination: "/cart",
@@ -259,8 +291,6 @@
                 onClick: function() {} // Callback after click
             }).showToast();
 
-            
-            
         }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

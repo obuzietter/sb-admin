@@ -3,6 +3,7 @@
 require __DIR__ . '/admin.php';
 
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\Shop\CartItemController;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use Illuminate\Http\Request;
@@ -31,6 +32,9 @@ Route::get('/cart', function () {
 
     return view('shop.cart');
 })->name('cart');
+
+Route::post('cart-item-store', [CartItemController::class, 'store'])->name('cart.item.store'); 
+
 
 Route::get('/checkout', function () {
 

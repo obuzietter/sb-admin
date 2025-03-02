@@ -97,7 +97,7 @@
                                     class="delete-form d-inline" id="{{ $brand->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deletebrand({{ $brand->id }})">
+                                    <button type="submit" class="btn btn-danger delete-btn" onclick="deleteBrand({{ $brand->id }})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
@@ -118,7 +118,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function deletebrand(catID) {
+        function deleteBrand(catID) {
             event.preventDefault(); // Prevent form submission
             
             Swal.fire({
