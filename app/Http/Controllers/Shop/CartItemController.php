@@ -56,7 +56,7 @@ class CartItemController extends Controller
                 'quantity' => $request->quantity,
                 'price' => $request->price,
                 'total_price' => $request->quantity * $request->price,
-                'attributes' => json_encode($request->attributes),
+                
             ]);
         }
 
