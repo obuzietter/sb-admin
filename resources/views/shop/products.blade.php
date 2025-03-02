@@ -185,9 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Product Cards --}}
-                        <link rel="stylesheet" type="text/css"
-                            href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+                        {{-- Product Cards --}}                        
                         <div class="col-lg-9">
                             <div class="row g-4">
 
@@ -212,7 +210,7 @@
                                                         KSH {{ number_format($product->price, 2) }}
                                                     </span>
                                                     <button class="btn btn-primary rounded-pill d-flex align-items-center"
-                                                        onclick="notify()">
+                                                        onclick="addToCart('{{ $product->name }}')">
                                                         <i class="fa fa-shopping-bag me-2"></i> Add to Cart
                                                     </button>
                                                 </div>
@@ -239,10 +237,10 @@
     </div>
     <!-- Fruits Shop End-->
     <script>
-        function notify() {
+        function addToCart(product) {
 
             Toastify({
-                text: "Product added to cart!",
+                text: product + " added to cart!",
                 className: "rounded-pill",
                 duration: 3000,
                 destination: "/cart",
@@ -260,6 +258,9 @@
                 },
                 onClick: function() {} // Callback after click
             }).showToast();
+
+            
+            
         }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
