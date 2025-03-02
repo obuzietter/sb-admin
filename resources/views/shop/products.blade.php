@@ -261,6 +261,7 @@
                 }).then(response => response.json())
                 .then(data => {
                     console.log(data);
+                    updateCartCount(data.total_cart_items);
                     showToast();
                 })
                 .catch(error => {
@@ -291,6 +292,10 @@
                 onClick: function() {} // Callback after click
             }).showToast();
 
+        }
+
+        function updateCartCount(count) {
+            document.getElementById('cart-count').innerText = count;            
         }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

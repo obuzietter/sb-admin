@@ -31,24 +31,16 @@ class CartItemController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('store() function called');
-    
-        // Log raw request data
-        Log::info('Request Data:', $request->all());
-    
+        // Get user ID and session ID
         $userId = Auth::id();
         $sessionId = session()->getId();
-    
-        Log::info("User ID: " . ($userId ?? 'Guest') . ", Session ID: $sessionId");
-    
+
         // Validate request structure
         if (!isset($request->product) || !isset($request->product['id'])) {
-            Log::error('Product data is missing in the request');
             return response()->json(['error' => 'Product data is missing'], 400);
         }
-    
+
         // Check if item already exists in cart
-        Log::info('Checking if product exists in cart...');
         $cartItem = CartItem::where('product_id', $request->product['id'])
             ->when($userId, function ($query) use ($userId) {
                 return $query->where('user_id', $userId);
@@ -57,21 +49,14 @@ class CartItemController extends Controller
                 return $query->where('session_id', $sessionId);
             })
             ->first();
-    
-        Log::info($cartItem ? 'Item exists in cart' : 'Item not found, creating new one');
-    
+
         if ($cartItem) {
             // If item exists, update quantity
-            Log::info("Updating existing cart item ID: {$cartItem->id}");
-    
             $cartItem->quantity += $request->product['quantity'];
             $cartItem->total_price = $cartItem->quantity * $cartItem->price;
             $cartItem->save();
-    
-            Log::info("Updated cart item: Quantity = {$cartItem->quantity}, Total Price = {$cartItem->total_price}");
         } else {
             // Otherwise, add new item
-            Log::info('Adding new cart item...');
             $newCartItem = CartItem::create([
                 'user_id' => $userId,
                 'session_id' => $userId ? null : $sessionId,
@@ -82,12 +67,17 @@ class CartItemController extends Controller
                 'quantity' => $request->product['quantity'] ?? 1,
                 'total_price' => ($request->product['price'] ?? 0) * ($request->product['quantity'] ?? 1)
             ]);
-    
-            Log::info("New cart item created: ID = {$newCartItem->id}");
         }
-    
-        Log::info('Returning success response');
-        return response()->json(['message' => 'Item added to cart']);
+
+        //get total cart count by getting the sum of the qunatity for all the columns
+        $totalCartItems = CartItem::where('user_id', $userId)
+            ->orWhere('session_id', $sessionId)
+            ->sum('quantity');
+
+        return response()->json([
+            'message' => 'Item added to cart',
+            'total_cart_items' => $totalCartItems
+        ]);
     }
 
 
