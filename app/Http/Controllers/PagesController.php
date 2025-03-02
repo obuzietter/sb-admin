@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Shop\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -24,5 +26,19 @@ class PagesController extends Controller
     public function services()
     {
         return view('pages.services');
+    }
+
+    public function cart(){
+        // Get user ID and session ID
+        $userId = Auth::id();
+        $sessionId = session()->getId();
+
+        //get total cart count by getting the sum of the qunatity for all the columns
+        $cartItems = CartItem::where('user_id', $userId)
+            ->orWhere('session_id', $sessionId)->get();
+
+
+        
+        return view('shop.cart', compact('cartItems'));
     }
 }

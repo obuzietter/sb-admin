@@ -28,10 +28,7 @@ Route::get('/contact', function () {
     return view('shop.contact');
 })->name('contact');
 
-Route::get('/cart', function () {
-
-    return view('shop.cart');
-})->name('cart');
+Route::get('/cart', [PagesController::class, 'cart'])->name('cart');
 
 Route::post('cart-item-store', [CartItemController::class, 'store'])->name('cart.item.store'); 
 
