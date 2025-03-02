@@ -37,10 +37,10 @@
                                 <label for="fruits">Default Sorting:</label>
                                 <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3"
                                     form="fruitform">
-                                    <option value="volvo">Nothing</option>
-                                    <option value="saab">Popularity</option>
-                                    <option value="opel">Organic</option>
-                                    <option value="audi">Fantastic</option>
+                                    <option value="low_price">Lowest Price First </option>
+                                    <option value="high_price">Highest Price First</option>
+                                    <option value="new_first">Newest First</option>
+                                    <option value="old_first">Oldest First</option>
                                 </select>
                             </div>
                         </div>
