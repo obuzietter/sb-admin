@@ -1,9 +1,8 @@
 @extends('shop.layouts.shop')
 
-@section('title', 'Home')
+@section('title', 'Cart')
 
 @section('content')
-
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">Cart</h1>
@@ -15,7 +14,6 @@
     </div>
     <!-- Single Page Header End -->
 
-
     <!-- Cart Page Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
@@ -23,52 +21,38 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Handle</th>
+                            <th>Product</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Handle</th>
                         </tr>
                     </thead>
-                    <tbody>
-
+                    <tbody id="cart-body">
                         @forelse ($cartItems as $item)
-                            <tr>
-                                <td><img src="{{ asset('storage/' . $item->product_image) }}" alt="product"
-                                        class="img-fluid" style="width: 100px;"></td>
-                                <td>
-                                    <p class="mb-0 mt-4">{{ $item->product_name }}</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">${{ $item->price }}</p>
-                                </td>
+                            <tr data-id="{{ $item->product_id }}" data-price="{{ $item->price }}">
+                                <td><img src="{{ asset('storage/' . $item->product_image) }}" alt="product" class="img-fluid" style="width: 100px;"></td>
+                                <td><p class="mb-0 mt-4">{{ $item->product_name }}</p></td>
+                                <td><p class="mb-0 mt-4">KES {{ $item->price }}</p></td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0"
-                                            value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" data-action="decrease">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <input type="text" class="form-control form-control-sm text-center border-0" data-quantity name="quantity" value="{{ $item->quantity }}">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border" data-action="increase">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
                                     </div>
                                 </td>
+                                <td><p class="mb-0 mt-4" data-total>KES {{ $item->price * $item->quantity }}</p></td>
                                 <td>
-                                    <p class="mb-0 mt-4">${{ $item->price * $item->quantity }}</p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                    <button class="btn btn-md rounded-circle bg-light border mt-4" data-action="remove">
                                         <i class="fa fa-times text-danger"></i>
                                     </button>
                                 </td>
                             </tr>
-
                         @empty
                             <tr>
                                 <td colspan="6" class="text-center">No items in cart</td>
@@ -77,40 +61,36 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mt-5">
-                <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply
-                    Coupon</button>
-            </div>
-            <div class="row g-4 justify-content-end">
-                <div class="col-8"></div>
-                <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                    <div class="bg-light rounded">
-                        <div class="p-4">
-                            <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                            <div class="d-flex justify-content-between mb-4">
-                                <h5 class="mb-0 me-4">Subtotal:</h5>
-                                <p class="mb-0">$96.00</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="mb-0 me-4">Shipping</h5>
-                                <div class="">
-                                    <p class="mb-0">Flat rate: $3.00</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 text-end">Shipping to Ukraine.</p>
-                        </div>
-                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                            <h5 class="mb-0 ps-4 me-4">Total</h5>
-                            <p class="mb-0 pe-4">$99.00</p>
-                        </div>
-                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                            type="button">Proceed Checkout</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- Cart Page End -->
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartBody = document.getElementById("cart-body");
+
+            cartBody.addEventListener("click", (event) => {
+                const button = event.target.closest("button");
+                if (!button) return;
+
+                const row = button.closest("tr");
+                const price = parseFloat(row.dataset.price);
+                const quantityInput = row.querySelector("[data-quantity]");
+                const totalElement = row.querySelector("[data-total]");
+                let quantity = parseInt(quantityInput.value);
+
+                if (button.dataset.action === "increase") {
+                    quantity += 1;
+                } else if (button.dataset.action === "decrease" && quantity > 1) {
+                    quantity -= 1;
+                } else if (button.dataset.action === "remove") {
+                    row.remove();
+                    return;
+                }
+
+                quantityInput.value = quantity;
+                totalElement.innerText = `KES ${(price * quantity).toFixed(2)}`;
+            });
+        });
+    </script>
 @endsection
