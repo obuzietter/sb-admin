@@ -32,21 +32,31 @@
                     <tbody id="cart-body">
                         @forelse ($cartItems as $item)
                             <tr data-id="{{ $item->product_id }}" data-price="{{ $item->price }}">
-                                <td><img src="{{ asset('storage/' . $item->product_image) }}" alt="product" class="img-fluid" style="width: 100px;"></td>
-                                <td><p class="mb-0 mt-4">{{ $item->product_name }}</p></td>
-                                <td><p class="mb-0 mt-4">KES {{ $item->price }}</p></td>
+                                <td><img src="{{ asset('storage/' . $item->product_image) }}" alt="product"
+                                        class="img-fluid" style="width: 100px;"></td>
+                                <td>
+                                    <p class="mb-0 mt-4">{{ $item->product_name }}</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4">KES {{ $item->price }}</p>
+                                </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" data-action="decrease">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border"
+                                            data-action="decrease">
                                             <i class="fa fa-minus"></i>
                                         </button>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" data-quantity name="quantity" value="{{ $item->quantity }}">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border" data-action="increase">
+                                        <input type="text" class="form-control form-control-sm text-center border-0"
+                                            data-quantity name="quantity" value="{{ $item->quantity }}" readonly>
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border"
+                                            data-action="increase">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </td>
-                                <td><p class="mb-0 mt-4" data-total>KES {{ $item->price * $item->quantity }}</p></td>
+                                <td>
+                                    <p class="mb-0 mt-4" data-total>KES {{ $item->price * $item->quantity }}</p>
+                                </td>
                                 <td>
                                     <button class="btn btn-md rounded-circle bg-light border mt-4" data-action="remove">
                                         <i class="fa fa-times text-danger"></i>
@@ -80,8 +90,10 @@
                 let quantity = parseInt(quantityInput.value);
 
                 if (button.dataset.action === "increase") {
+                    console.log(quantity);                    
                     quantity += 1;
                 } else if (button.dataset.action === "decrease" && quantity > 1) {
+                    console.log(quantity);                    
                     quantity -= 1;
                 } else if (button.dataset.action === "remove") {
                     row.remove();
@@ -89,7 +101,7 @@
                 }
 
                 quantityInput.value = quantity;
-                totalElement.innerText = `KES ${(price * quantity).toFixed(2)}`;
+                totalElement.innerText = `KES ${(price * quantity)}`;
             });
         });
     </script>
