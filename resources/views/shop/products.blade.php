@@ -188,6 +188,7 @@
                         {{-- Product Cards --}}
                         <div class="col-lg-9">
                             <div class="row g-4">
+                                
 
                                 @forelse ($products as $product)
                                     <div class="col-md-6 col-lg-6 col-xl-4 ">
@@ -218,6 +219,8 @@
 
                                         </div>
                                     </div>
+
+                                    
                                 @empty
                                     <h1>No products found</h1>
                                 @endforelse
