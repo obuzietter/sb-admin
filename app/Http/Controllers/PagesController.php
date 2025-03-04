@@ -15,7 +15,19 @@ class PagesController extends Controller
         $categories = Category::all();
         $products = Product::where('is_enabled', 1)->paginate(20);
         return view('shop.products', compact('categories', 'products'));
-        
+    }
+    public function productSearch(Request $request)
+    {
+        $categories = Category::all();
+        $search = $request->input('search');
+        $products = Product::where(function ($query) use ($search) {
+            $query->where('name', 'like', "%$search%")
+                  ->orWhere('description', 'like', "%$search%");
+        })
+        ->where('is_enabled', 1) // Ensures only enabled products are fetched
+        ->paginate(20);
+    
+        return view('shop.products', compact('categories', 'products'));
     }
 
     public function about()
@@ -28,7 +40,8 @@ class PagesController extends Controller
         return view('pages.services');
     }
 
-    public function cart(){
+    public function cart()
+    {
         // Get user ID and session ID
         $userId = Auth::id();
         $sessionId = session()->getId();
@@ -38,7 +51,7 @@ class PagesController extends Controller
             ->orWhere('session_id', $sessionId)->get();
 
 
-        
+
         return view('shop.cart', compact('cartItems'));
     }
 }

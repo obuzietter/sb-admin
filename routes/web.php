@@ -32,11 +32,13 @@ Route::get('/cart', [PagesController::class, 'cart'])->name('cart');
 
 Route::post('cart-item-store', [CartItemController::class, 'store'])->name('cart.item.store'); 
 
-
 Route::get('/checkout', function () {
 
     return view('shop.checkout');
 })->name('checkout');
+
+// search products
+Route::post('/search', [PagesController::class, 'productSearch'])->name('product.search');
 
 // Generate slug if not provided
 // Route::get('/slug-generate', function () {
