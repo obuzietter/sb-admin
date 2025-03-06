@@ -3,16 +3,7 @@
 @section('title', 'Cart')
 
 @section('content')
-    <!-- Single Page Header start -->
-    <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Cart</h1>
-        <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Cart</li>
-        </ol>
-    </div>
-    <!-- Single Page Header End -->
+    <!-- ... (existing header code) ... -->
 
     <!-- Cart Page Start -->
     <div class="container-fluid py-5">
@@ -32,8 +23,10 @@
                     <tbody id="cart-body">
                         @forelse ($cartItems as $item)
                             <tr data-id="{{ $item->product_id }}" data-price="{{ $item->price }}">
-                                <td><img src="{{ asset('storage/' . $item->product_image) }}" alt="product"
-                                        class="img-fluid" style="width: 100px;"></td>
+                                <td>
+                                    <img src="{{ asset('storage/' . $item->product_image) }}" alt="product" class="img-fluid"
+                                        style="width: 100px;">
+                                </td>
                                 <td>
                                     <p class="mb-0 mt-4">{{ $item->product_name }}</p>
                                 </td>
@@ -42,23 +35,28 @@
                                 </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                                            data-action="decrease">
+                                        <!-- Add type="button" to prevent form submission -->
+                                        <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border"
+                                            data-action="decrease" onclick="decreaseQuantity({{ $item->product_id }})">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                         <input type="text" class="form-control form-control-sm text-center border-0"
-                                            data-quantity name="quantity" value="{{ $item->quantity }}" readonly>
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                                            data-action="increase">
+                                            data-id="{{ $item->product_id }}" name="quantity" value="{{ $item->quantity }}"
+                                            readonly>
+                                        <!-- Add type="button" to prevent form submission -->
+                                        <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border"
+                                            data-action="increase" onclick="increaseQuantity({{ $item->product_id }})">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4" data-total>KES {{ $item->price * $item->quantity }}</p>
+                                    <p class="mb-0 mt-4" data-id="{{ $item->product_id }}">KES
+                                        {{ $item->price * $item->quantity }}</p>
                                 </td>
                                 <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" data-action="remove">
+                                    <button class="btn btn-md rounded-circle bg-light border mt-4" data-action="remove"
+                                        onclick="removeItem({{ $item->product_id }})">
                                         <i class="fa fa-times text-danger"></i>
                                     </button>
                                 </td>
@@ -76,49 +74,43 @@
     <!-- Cart Page End -->
 
     <script>
-        document.querySelectorAll("[data-id]").forEach(row => {
-            row.addEventListener("click", () => {
-                console.log("row clicked");
-                
+        // Decrease quantity
+        function decreaseQuantity(id) {
+            const quantityInput = document.querySelector(`input[data-id="${id}"]`);
 
-            })
-        });
+            let quantity = parseInt(quantityInput.value);
 
+            if (quantity > 1) {
+                quantityInput.value = quantity--;
+                updateTotal(quantity, quantityInput);
+            } else {
+                removeItem(id);
+            }
 
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     const cartBody = document.getElementById("cart-body");
+        }
 
-        //     cartBody.addEventListener("click", (event) => {
-        //         const button = event.target.closest("button");
-        //         if (!button) return;
+        // Increase quantity
+        function increaseQuantity(id) {
+            const quantityInput = document.querySelector(`input[data-id="${id}"]`);
 
-        //         const row = button.closest("tr");
-        //         const price = parseFloat(row.dataset.price);
-        //         const quantityInput = row.querySelector("[data-quantity]");
-        //         const totalElement = row.querySelector("[data-total]");
-        //         let quantity = parseInt(quantityInput.value);
+            let quantity = parseInt(quantityInput.value);
 
-        //         console.log(quantityInput.value);
+            quantityInput.value = quantity++;
+            updateTotal(quantity, quantityInput);
+        }
 
-        //         console.log('initial ' + quantity);
+        // Update total
+        function updateTotal(quantity, input) {
+            const total = document.querySelector(`p[data-id="${input.getAttribute('data-id')}"]`);
+            const price = parseFloat(input.closest('tr').getAttribute('data-price'));
+            total.textContent = `KES ${price * quantity}`;
 
+        }
 
-        //         if (button.dataset.action === "increase") {
-        //             console.log('before ' + quantity);                    
-        //             quantity += 1;
-        //             console.log('after ' + quantity);
-
-        //         } else if (button.dataset.action === "decrease" && quantity > 1) {
-        //             console.log(quantity);                    
-        //             quantity -= 1;
-        //         } else if (button.dataset.action === "remove") {
-        //             row.remove();
-        //             return;
-        //         }
-
-        //         quantityInput.value = quantity;
-        //         totalElement.innerText = `KES ${(price * quantity)}`;
-        //     });
-        // });
+        // Remove item from cart
+        function removeItem(id) {
+            const item = document.querySelector(`tr[data-id="${id}"]`);
+            item.remove();
+        }
     </script>
 @endsection
