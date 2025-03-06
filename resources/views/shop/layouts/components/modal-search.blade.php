@@ -10,7 +10,7 @@
                 @csrf
                 <div class="input-group w-75 mx-auto d-flex">
                     <input type="search" class="form-control p-3" name="search" placeholder="keywords" aria-describedby="search-icon-1">
-                    <button type="submit"><span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span></button>
+                    <button type="submit" class="btn p-0 border-0 shadow-none"><span id="search-icon-1" class="input-group-text p-3 px-4 d-inline-block"><i class="fa fa-search"></i></span></button>
                 </div>
                </form>
             </div>
