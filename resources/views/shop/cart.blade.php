@@ -3,8 +3,8 @@
 @section('title', 'Cart')
 
 @section('content')
-     <!-- Single Page Header start -->
-     <div class="container-fluid page-header py-5">
+    <!-- Single Page Header start -->
+    <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">Cart</h1>
         <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -33,8 +33,8 @@
                         @forelse ($cartItems as $item)
                             <tr data-id="{{ $item->product_id }}" data-price="{{ $item->price }}">
                                 <td>
-                                    <img src="{{ asset('storage/' . $item->product_image) }}" alt="product" class="img-fluid"
-                                        style="width: 100px;">
+                                    <img src="{{ asset('storage/' . $item->product_image) }}" alt="product"
+                                        class="img-fluid" style="width: 100px;">
                                 </td>
                                 <td>
                                     <p class="mb-0 mt-4">{{ $item->product_name }}</p>
@@ -134,6 +134,7 @@
                 throw new Error('Something went wrong');
             }).then(data => {
                 console.log(data);
+                document.getElementById('cart-count').textContent = data.total_cart_items;
             }).catch(error => {
                 console.error(error);
             });
@@ -157,10 +158,11 @@
                 throw new Error('Something went wrong');
             }).then(data => {
                 console.log(data);
+                console.log(data.total_cart_items);                
+                document.getElementById('cart-count').textContent = data.total_cart_items;
             }).catch(error => {
                 console.error(error);
             });
         }
-       
     </script>
 @endsection

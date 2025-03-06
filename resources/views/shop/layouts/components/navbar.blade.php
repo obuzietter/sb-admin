@@ -47,7 +47,7 @@
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span
                             class="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white px-1" id="cart-count"
-                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{ $totalCartItems}}</span>
+                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{ $totalCartItems }}</span>
                     </a>
                     <a href="#" class="my-auto">
                         <i class="fas fa-user fa-2x"></i>
