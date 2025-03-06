@@ -72,7 +72,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">No items in cart</td>
+                                <td colspan="6" class="text-center fs-3">No items in cart</td>
                             </tr>
                         @endforelse
                     </tbody>
