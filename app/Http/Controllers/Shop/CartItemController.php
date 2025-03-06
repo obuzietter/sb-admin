@@ -111,6 +111,23 @@ class CartItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //delete the item from the cart where product_id is equal to the id
+        $cartItem = CartItem::where('product_id', $id)
+            ->where('user_id', Auth::id())
+            ->orWhere('session_id', session()->getId())
+            ->first();
+        $cartItem->delete();
+
+        //get total cart count by getting the sum of the qunatity for all the columns
+        $totalCartItems = CartItem::where('user_id', Auth::id())
+            ->orWhere('session_id', session()->getId())
+            ->sum('quantity');
+
+        return response()->json([
+            'message' => 'Item removed from cart',
+            'total_cart_items' => $totalCartItems
+        ]);
+
+
     }
 }

@@ -110,7 +110,24 @@
         // Remove item from cart
         function removeItem(id) {
             const item = document.querySelector(`tr[data-id="${id}"]`);
-            item.remove();
+
+            // ajax to delete item from cart in the cart controller
+            fetch(`cart-item-delete/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    item.remove();
+                    return response.json();
+                }
+                throw new Error('Something went wrong');
+            }).then(data => {
+                console.log(data);
+            }).catch(error => {
+                console.error(error);
+            });
         }
     </script>
 @endsection
