@@ -113,7 +113,7 @@
             const total = document.querySelector(`p[data-id="${input.getAttribute('data-id')}"]`);
             const price = parseFloat(input.closest('tr').getAttribute('data-price'));
             total.textContent = `KES ${price * quantity}`;
-
+            updateCartItem(input.getAttribute('data-id'), quantity);
         }
 
         // Remove item from cart
@@ -138,5 +138,29 @@
                 console.error(error);
             });
         }
+
+        // ajax to update cart item quantity and total proce in the cart controller
+        function updateCartItem(id, quantity) {
+            fetch(`cart-item-update/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    quantity: quantity
+                })
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Something went wrong');
+            }).then(data => {
+                console.log(data);
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+       
     </script>
 @endsection

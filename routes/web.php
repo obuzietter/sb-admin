@@ -32,6 +32,7 @@ Route::get('cart', [PagesController::class, 'cart'])->name('cart');
 Route::post('cart-item-store', [CartItemController::class, 'store'])->name('cart.item.store'); 
 
 Route::delete('cart-item-delete/{id}', [CartItemController::class, 'destroy'])->name('cart.item.delete');
+Route::put('cart-item-update/{id}', [CartItemController::class, 'update'])->name('cart.item.update');
 
 Route::get('/checkout', function () {
 

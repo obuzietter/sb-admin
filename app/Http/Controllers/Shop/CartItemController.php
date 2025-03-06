@@ -104,6 +104,33 @@ class CartItemController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // Get user ID and session ID
+        $userId = Auth::id();
+        $sessionId = session()->getId();
+
+        $cartItem = CartItem::where('product_id', $id)->first();
+
+        // dd($cartItem);
+
+
+        $cartItem->quantity = $request->quantity;
+        $cartItem->total_price = $cartItem->quantity * $cartItem->price;
+        $cartItem->save();
+
+        //get total cart count by getting the sum of the qunatity for all the columns
+        $totalCartItems = CartItem::where('user_id', Auth::id())
+            ->when($userId, function ($query) use ($userId) {
+                return $query->where('user_id', $userId);
+            })
+            ->when(!$userId, function ($query) use ($sessionId) {
+                return $query->where('session_id', $sessionId);
+            })
+            ->sum('quantity');
+
+        return response()->json([
+            'message' => 'Item updated in cart',
+            'total_cart_items' => $totalCartItems
+        ]);
     }
 
     /**
@@ -127,7 +154,5 @@ class CartItemController extends Controller
             'message' => 'Item removed from cart',
             'total_cart_items' => $totalCartItems
         ]);
-
-
     }
 }
