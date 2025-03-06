@@ -76,33 +76,49 @@
     <!-- Cart Page End -->
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cartBody = document.getElementById("cart-body");
+        document.querySelectorAll("[data-id]").forEach(row => {
+            row.addEventListener("click", () => {
+                console.log("row clicked");
+                
 
-            cartBody.addEventListener("click", (event) => {
-                const button = event.target.closest("button");
-                if (!button) return;
-
-                const row = button.closest("tr");
-                const price = parseFloat(row.dataset.price);
-                const quantityInput = row.querySelector("[data-quantity]");
-                const totalElement = row.querySelector("[data-total]");
-                let quantity = parseInt(quantityInput.value);
-
-                if (button.dataset.action === "increase") {
-                    console.log(quantity);                    
-                    quantity += 1;
-                } else if (button.dataset.action === "decrease" && quantity > 1) {
-                    console.log(quantity);                    
-                    quantity -= 1;
-                } else if (button.dataset.action === "remove") {
-                    row.remove();
-                    return;
-                }
-
-                quantityInput.value = quantity;
-                totalElement.innerText = `KES ${(price * quantity)}`;
-            });
+            })
         });
+
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const cartBody = document.getElementById("cart-body");
+
+        //     cartBody.addEventListener("click", (event) => {
+        //         const button = event.target.closest("button");
+        //         if (!button) return;
+
+        //         const row = button.closest("tr");
+        //         const price = parseFloat(row.dataset.price);
+        //         const quantityInput = row.querySelector("[data-quantity]");
+        //         const totalElement = row.querySelector("[data-total]");
+        //         let quantity = parseInt(quantityInput.value);
+
+        //         console.log(quantityInput.value);
+
+        //         console.log('initial ' + quantity);
+
+
+        //         if (button.dataset.action === "increase") {
+        //             console.log('before ' + quantity);                    
+        //             quantity += 1;
+        //             console.log('after ' + quantity);
+
+        //         } else if (button.dataset.action === "decrease" && quantity > 1) {
+        //             console.log(quantity);                    
+        //             quantity -= 1;
+        //         } else if (button.dataset.action === "remove") {
+        //             row.remove();
+        //             return;
+        //         }
+
+        //         quantityInput.value = quantity;
+        //         totalElement.innerText = `KES ${(price * quantity)}`;
+        //     });
+        // });
     </script>
 @endsection

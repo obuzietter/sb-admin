@@ -19,7 +19,7 @@ class PagesController extends Controller
     public function productSearch(Request $request)
     {
         $categories = Category::all();
-        $search = $request->input('search');
+        $search = $request->search;
         $products = Product::where(function ($query) use ($search) {
             $query->where('name', 'like', "%$search%")
                   ->orWhere('description', 'like', "%$search%");

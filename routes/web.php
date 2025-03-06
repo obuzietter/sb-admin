@@ -38,7 +38,7 @@ Route::get('/checkout', function () {
 })->name('checkout');
 
 // search products
-Route::post('/search', [PagesController::class, 'productSearch'])->name('product.search');
+Route::get('/search', [PagesController::class, 'productSearch'])->name('product.search');
 
 // Generate slug if not provided
 // Route::get('/slug-generate', function () {
