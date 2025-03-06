@@ -11,12 +11,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-Route::get('/', function () {
+Route::get('/', [PagesController::class, 'home'])->name('home');
 
-    return view('shop.home');
-})->name('home');
-
-Route::get('/products', [PagesController::class, 'shop'])->name('products');
+Route::get('/products', [PagesController::class, 'products'])->name('products');
 
 Route::get('/product-detail', function () {
 
