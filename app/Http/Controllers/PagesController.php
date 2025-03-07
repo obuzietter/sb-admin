@@ -67,6 +67,15 @@ class PagesController extends Controller
         return view('pages.services');
     }
 
+    public function contact()
+    {
+        $totalCartItems = CartItem::where('user_id', $this->userId)
+            ->orWhere('session_id', $this->sessionId)
+            ->sum('quantity');
+
+        return view('shop.contact', compact('totalCartItems'));
+    }
+
     public function cart()
     {
         // Get user ID and session ID

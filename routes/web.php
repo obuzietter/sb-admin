@@ -20,10 +20,7 @@ Route::get('/product-detail', function () {
     return view('shop.product-detail');
 })->name('product.show');
 
-Route::get('/contact', function () {
-
-    return view('shop.contact');
-})->name('contact');
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
 // cart routes
 
