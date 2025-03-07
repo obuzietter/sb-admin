@@ -2,9 +2,9 @@
     <div class="container topbar bg-primary d-none d-lg-block">
         <div class="d-flex justify-content-between">
             <div class="top-info ps-2">
-                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
+                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-white"></i> <a href="#"
                         class="text-white">178 Rongo, Migori</a></small>
-                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
+                <small class="me-3"><i class="fas fa-envelope me-2 text-white"></i><a href="#"
                         class="text-white">magandadiscountcentre@example.com</a></small>
             </div>
             <div class="top-link pe-2">
@@ -16,7 +16,7 @@
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="{{route('home')}}" class="navbar-brand">
+            <a href="{{ route('home') }}" class="navbar-brand">
                 <h1 class="text-primary display-6 fw-bold">MDC</h1>
             </a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -46,8 +46,9 @@
                     <a href="{{ route('cart') }}" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span
-                            class="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white px-1" id="cart-count"
-                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{ $totalCartItems }}</span>
+                            class="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white px-1"
+                            id="cart-count"
+                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{ $totalCartItems == 0 ? '' : $totalCartItems }}</span>
                     </a>
                     <a href="#" class="my-auto">
                         <i class="fas fa-user fa-2x"></i>
