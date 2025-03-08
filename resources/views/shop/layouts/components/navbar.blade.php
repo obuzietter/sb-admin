@@ -50,7 +50,7 @@
                             id="cart-count"
                             style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{ $totalCartItems == 0 ? '' : $totalCartItems }}</span>
                     </a>
-                    <a href="#" class="my-auto">
+                    <a href="{{ route('profile') }}" class="my-auto">
                         <i class="fas fa-user fa-2x"></i>
                     </a>
                 </div>

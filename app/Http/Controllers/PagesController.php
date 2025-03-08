@@ -93,4 +93,19 @@ class PagesController extends Controller
 
         return view('shop.cart', compact('cartItems', 'totalCartItems'));
     }
+
+    public function checkout()
+    {
+        $totalCartItems = CartItem::where('user_id', $this->userId)
+            ->orWhere('session_id', $this->sessionId)
+            ->sum('quantity');
+        return view('shop.checkout', compact('totalCartItems'));
+    }
+
+    public function profile() {
+        $totalCartItems = CartItem::where('user_id', $this->userId)
+            ->orWhere('session_id', $this->sessionId)
+            ->sum('quantity');
+        return view('shop.profile', compact('totalCartItems'));
+    }
 }
