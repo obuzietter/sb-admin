@@ -5,11 +5,11 @@
 @section('content')
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Shop</h1>
+        <h1 class="text-center text-white display-6">Profile</h1>
         <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Shop</li>
+            <li class="breadcrumb-item active text-white">Profile</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
@@ -19,9 +19,9 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3">
-            <div class="card">
+            <div class="card border-0" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
                 <div class="card-body text-center">
-                    <img src="https://via.placeholder.com/150" class="rounded-circle img-fluid" alt="User Image">
+                    <img src="https://img.freepik.com/free-vector/user-blue-gradient_78370-4692.jpg?uid=R97350360&ga=GA1.1.569336961.1721632028&semt=ais_hybrid" class="rounded-circle img-fluid" alt="User Image" width="75" height="75" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;">
                     <h5 class="mt-3">John Doe</h5>
                     <p class="text-muted">johndoe@example.com</p>
                     <button class="btn btn-primary btn-sm">Edit Profile</button>
@@ -31,7 +31,7 @@
 
         <!-- Profile Content -->
         <div class="col-md-9">
-            <div class="card">
+            <div class="card border-0" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                 <div class="card-header bg-primary text-white">
                     Account Details
                 </div>
@@ -46,7 +46,7 @@
             <!-- Orders & Wishlist -->
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card border-0" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                         <div class="card-header bg-success text-white">
                             Recent Orders
                         </div>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card border-0" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                         <div class="card-header bg-info text-white">
                             Wishlist
                         </div>
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Account Settings -->
-            <div class="card mt-3">
+            <div class="card mt-3 border-0" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                 <div class="card-header bg-dark text-white">
                     Account Settings
                 </div>
