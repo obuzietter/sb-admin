@@ -52,24 +52,31 @@ class AuthController extends Controller
     /**
      * Login user and return token
      */
-    // public function login(Request $request)
-    // {
-    //     $credentials = $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required|string',
-    //     ]);
-
-    //     if (!Auth::attempt($credentials)) {
-    //         throw ValidationException::withMessages([
-    //             'email' => ['The provided credentials are incorrect.'],
-    //         ]);
-    //     }
-
-    //     $user = Auth::user();
-    //     $token = $user->createToken('authToken')->plainTextToken;
-
-    //     return response()->json(['message' => 'Login successful', 'token' => $token, 'user' => $user], 200);
-    // }
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+    
+        $user = User::where('email', $request->email)->first();
+    
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'No account found with this email.',
+            ])->withInput($request->only('email'));
+        }
+    
+        if (!Auth::guard('user')->attempt($request->only('email', 'password'))) {
+            return back()->withErrors([
+                'password' => 'Incorrect password. Please try again.',
+            ])->withInput($request->only('email'));
+        }
+    
+        $request->session()->regenerate();
+        return redirect()->route('home');
+    }
+    
 
     /**
      * Logout user (Revoke token)

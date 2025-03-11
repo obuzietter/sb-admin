@@ -37,7 +37,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('register') }}" method="POST">
+            <form action="{{ route('user.register') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="first_name" class="form-label">First Name</label>
@@ -68,7 +68,7 @@
                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-                <p class="text-center mt-2">Already have an account? <a href="{{ route('login') }}">Login</a></p>
+                <p class="text-center mt-2">Already have an account? <a href="{{ route('login.show') }}">Login</a></p>
             </form>
         </div>
     </div>

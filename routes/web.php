@@ -46,13 +46,14 @@ Route::get('/search', [PagesController::class, 'productSearch'])->name('product.
 
 Route::middleware('guest:user')->group(function () {
 
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('user.register');
+    Route::post('/login', [AuthController::class, 'login'])->name('user.login');
 
-    Route::get('/sign-up', function () {
-        return view('shop.signup');
-    })->name('sign-up');
+    Route::get('/register/show', function () {
+        return view('shop.register');
+    })->name('register.show');
 
-    Route::get('/login', function () {
+    Route::get('/login/show', function () {
         return view('shop.login');
-    })->name('login');
+    })->name('login.show');
 });
