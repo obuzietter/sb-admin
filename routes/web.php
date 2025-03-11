@@ -40,6 +40,10 @@ Route::get('/sign-up', function () {
 
     return view('shop.signup');
 })->name('sign-up');
+Route::get('/login', function () {
+
+    return view('shop.login');
+})->name('login');
 
 Route::get('profile', [PagesController::class, 'profile'])->name('profile');
 
