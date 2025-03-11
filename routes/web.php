@@ -36,6 +36,11 @@ Route::get('/checkout', function () {
     return view('shop.checkout');
 })->name('checkout');
 
+Route::get('/sign-up', function () {
+
+    return view('shop.signup');
+})->name('sign-up');
+
 Route::get('profile', [PagesController::class, 'profile'])->name('profile');
 
 // search products
