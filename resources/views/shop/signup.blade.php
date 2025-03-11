@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="registration-form">
+    <section class="registration-form">
         <form>
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
@@ -31,7 +31,7 @@
                 <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="birth-date" placeholder="Birth Date">
+                <input type="date" class="form-control item" id="birth-date" placeholder="Birth Date">
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-block create-account">Create Account</button>
@@ -45,7 +45,7 @@
                 <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
             </div>
         </div>
-    </div>
+    </section>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js">
     </script>
