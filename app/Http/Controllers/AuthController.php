@@ -76,16 +76,35 @@ class AuthController extends Controller
         $request->session()->regenerate();
         return redirect()->route('home');
     }
+
+    /**
+     * Show login form
+     */
+    public function showLogin()
+    {
+        return view('shop.auth.login');
+    }
     
+    /**
+     * Show register form
+     */
+    public function showRegister()
+    {
+        return view('shop.auth.register');
+    }
 
     /**
      * Logout user (Revoke token)
      */
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        Auth::guard('user')->logout();
 
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.show');
     }
 
     /**

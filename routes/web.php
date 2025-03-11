@@ -49,11 +49,7 @@ Route::middleware('guest:user')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('user.register');
     Route::post('/login', [AuthController::class, 'login'])->name('user.login');
 
-    Route::get('/register/show', function () {
-        return view('shop.register');
-    })->name('register.show');
+    Route::get('/register/show', [AuthController::class, 'showRegister'])->name('register.show');
 
-    Route::get('/login/show', function () {
-        return view('shop.login');
-    })->name('login.show');
+    Route::get('/login/show', [AuthController::class, 'showLogin'])->name('login.show');
 });
