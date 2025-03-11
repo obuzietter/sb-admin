@@ -2,6 +2,7 @@
 
 require __DIR__ . '/admin.php';
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Shop\CartItemController;
 use App\Models\Admin\Category;
@@ -44,6 +45,9 @@ Route::get('/search', [PagesController::class, 'productSearch'])->name('product.
 
 
 Route::middleware('guest:user')->group(function () {
+
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+
     Route::get('/sign-up', function () {
         return view('shop.signup');
     })->name('sign-up');
