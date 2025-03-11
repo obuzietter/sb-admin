@@ -53,3 +53,7 @@ Route::middleware('guest:user')->group(function () {
 
     Route::get('/login/show', [AuthController::class, 'showLogin'])->name('login.show');
 });
+Route::middleware('auth:user')->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+});

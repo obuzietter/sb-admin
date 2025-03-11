@@ -80,7 +80,12 @@
                 <div class="card-body">
                     <button class="btn btn-outline-danger">Change Password</button>
                     <button class="btn btn-outline-warning">Manage Payment Methods</button>
-                    <button class="btn btn-outline-secondary">Logout</button>
+                    {{-- logout form --}}
+                    <form action="{{ route('user.logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-primary">Logout</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>
