@@ -40,6 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users', // This should match the providers section below
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins', // This should match the providers section below

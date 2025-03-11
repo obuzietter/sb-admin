@@ -14,10 +14,7 @@ Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');
     // return "<h1>Admin</h1>";
 });
-Route::get('/admini', function () {
-    // return redirect()->route('admin.dashboard');
-    return "<h1>Admin</h1>";
-});
+
 
 
 Route::prefix('admin')->group(function () {
