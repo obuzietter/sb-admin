@@ -17,7 +17,7 @@
         <h1 class="error-icon">&#9203;</h1>
         <h2 class="text-secondary">419 - Session Expired</h2>
         <p>Your session has expired. Please refresh and try again.</p>
-        <a href="/login" class="btn btn-primary">Login Again</a>
+        <a href="{{route('login.show')}}" class="btn btn-primary">Login Again</a>
     </div>
 </body>
 </html>
