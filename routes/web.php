@@ -38,7 +38,7 @@ Route::get('/checkout', function () {
 })->name('checkout');
 
 
-Route::get('profile', [PagesController::class, 'profile'])->name('profile');
+
 
 // search products
 Route::get('/search', [PagesController::class, 'productSearch'])->name('product.search');
@@ -56,4 +56,5 @@ Route::middleware('guest:user')->group(function () {
 Route::middleware('auth:user')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+    Route::get('profile', [PagesController::class, 'profile'])->name('profile');
 });

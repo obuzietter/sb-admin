@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return route('show.admin.login'); // Redirect admins to admin login
             }
     
-            return route('login'); // Default for regular users
+            return route('login.show'); // Default for regular users
         });
 
         $middleware->redirectUsersTo(function (Request $request) {
