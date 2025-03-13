@@ -12,31 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-Route::get('/', [PagesController::class, 'home'])->name('home');
-
-Route::get('/products', [PagesController::class, 'products'])->name('products');
-
-Route::get('/product-detail', function () {
-
-    return view('shop.product-detail');
-})->name('product.show');
-
-Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
-
-// cart routes
-
-Route::get('cart', [PagesController::class, 'cart'])->name('cart');
-
-Route::post('cart-item-store', [CartItemController::class, 'store'])->name('cart.item.store');
-
-Route::delete('cart-item-delete/{id}', [CartItemController::class, 'destroy'])->name('cart.item.delete');
-Route::put('cart-item-update/{id}', [CartItemController::class, 'update'])->name('cart.item.update');
-
-Route::get('/checkout', function () {
-
-    return view('shop.checkout');
-})->name('checkout');
-
 
 
 
@@ -57,4 +32,29 @@ Route::middleware('auth:user')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
     Route::get('profile', [PagesController::class, 'profile'])->name('profile');
+
+    Route::get('/', [PagesController::class, 'home'])->name('home');
+
+    Route::get('/products', [PagesController::class, 'products'])->name('products');
+
+    Route::get('/product-detail', function () {
+
+        return view('shop.product-detail');
+    })->name('product.show');
+
+    Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+
+    // cart routes
+
+    Route::get('cart', [PagesController::class, 'cart'])->name('cart');
+
+    Route::post('cart-item-store', [CartItemController::class, 'store'])->name('cart.item.store');
+
+    Route::delete('cart-item-delete/{id}', [CartItemController::class, 'destroy'])->name('cart.item.delete');
+    Route::put('cart-item-update/{id}', [CartItemController::class, 'update'])->name('cart.item.update');
+
+    Route::get('/checkout', function () {
+
+        return view('shop.checkout');
+    })->name('checkout');
 });
