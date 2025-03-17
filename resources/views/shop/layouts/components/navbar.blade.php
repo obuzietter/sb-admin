@@ -25,8 +25,10 @@
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ route('products') }}" class="nav-item nav-link">Shop</a>
+                    <a href="{{ route('home') }}"
+                        class="nav-item nav-link {{ Request::segment(1) ?? 'active fw-bold' }}">Home</a>
+                    <a href="{{ route('products') }}"
+                        class="nav-item nav-link {{ Request::segment(1) == 'products' ? 'active fw-bold' : ' ' }}">Products</a>
                     <a href="{{ route('product.show') }}" class="nav-item nav-link">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -37,7 +39,7 @@
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('contact') }}" class="nav-item nav-link {{Request::segment(1) == 'contact' ? 'active fw-bold' : ' '}}">Contact</a>
                 </div>
                 <div class="d-flex m-3 me-0">
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
