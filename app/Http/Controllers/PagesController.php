@@ -96,10 +96,16 @@ class PagesController extends Controller
 
     public function checkout()
     {
+        $subTotal = CartItem::where('user_id', $this->userId)
+            ->orWhere('session_id', $this->sessionId)
+            ->sum('total_price');
+        $cartItems = CartItem::where('user_id', $this->userId)
+            ->orWhere('session_id', $this->sessionId)
+            ->get();
         $totalCartItems = CartItem::where('user_id', $this->userId)
             ->orWhere('session_id', $this->sessionId)
             ->sum('quantity');
-        return view('shop.checkout', compact('totalCartItems'));
+        return view('shop.checkout', compact('totalCartItems', 'cartItems', 'subTotal'));
     }
 
     public function profile() {

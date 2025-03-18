@@ -53,8 +53,5 @@ Route::middleware('auth:user')->group(function () {
     Route::delete('cart-item-delete/{id}', [CartItemController::class, 'destroy'])->name('cart.item.delete');
     Route::put('cart-item-update/{id}', [CartItemController::class, 'update'])->name('cart.item.update');
 
-    Route::get('/checkout', function () {
-
-        return view('shop.checkout');
-    })->name('checkout');
+    Route::get('/checkout', [PagesController::class, 'checkout'])->name('checkout');
 });
