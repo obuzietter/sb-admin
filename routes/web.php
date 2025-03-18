@@ -4,6 +4,7 @@ require __DIR__ . '/admin.php';
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\Shop\AddressController;
 use App\Http\Controllers\Shop\CartItemController;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
@@ -54,4 +55,6 @@ Route::middleware('auth:user')->group(function () {
     Route::put('cart-item-update/{id}', [CartItemController::class, 'update'])->name('cart.item.update');
 
     Route::get('/checkout', [PagesController::class, 'checkout'])->name('checkout');
+
+    Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
 });

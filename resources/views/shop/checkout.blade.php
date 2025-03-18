@@ -15,11 +15,22 @@
     </div>
     <!-- Single Page Header End -->
 
-
+   
     <!-- Checkout Page Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <form action="#">
+    <div class="container-fluid py-4">
+        <div class="container py-2">
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+            <form action="{{ route('address.store') }}" method="POST">
+                @csrf
                 <div class="row g-5">
                     <div class="col-md-12 col-lg-6 col-xl-7">
                         <div class="accordion" id="checkoutAccordion">
@@ -94,8 +105,9 @@
                                             </div>
                                         </div>
                                         <div class="form-check my-3">
-                                            <input class="form-check-input" type="checkbox" id="ship_to_different_address"
-                                                name="ship_to_different_address" value="1" checked>
+                                            <input class="form-check-input" type="checkbox"
+                                                id="ship_to_different_address" name="ship_to_different_address"
+                                                value="1" checked>
                                             <label class="form-check-label" for="ship_to_different_address">Ship to a
                                                 different address?</label>
                                         </div>
@@ -253,9 +265,10 @@
                             </div>
                         </div>
                         <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                            <button type="button"
-                                class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place
-                                Order</button>
+                            <button type="submit"
+                                class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">
+                                Place Order
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -273,9 +286,12 @@
 
                 if (!isChecked) {
                     shippingField.value = billingField.value;
-                    // disable all shipping fields
-                    shippingField.setAttribute("disabled", "disabled");
+                    // make all fields readonly
+                    shippingField.setAttribute("readonly", true);
+                    shippingField.style.backgroundColor = "#f5f5f5";
                 } else {
+                    // make all fields writable
+                    shippingField.removeAttribute("readonly");
                     shippingField.value = "";
                 }
             });
