@@ -75,8 +75,13 @@
                                 <td colspan="6" class="text-center fs-3">No items in cart</td>
                             </tr>
                         @endforelse
+
                     </tbody>
                 </table>
+                {{-- Proceed to checkout --}}
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('checkout') }}" class="btn btn-primary">Proceed to Checkout</a>
+                </div>
             </div>
         </div>
     </div>
@@ -158,7 +163,7 @@
                 throw new Error('Something went wrong');
             }).then(data => {
                 console.log(data);
-                console.log(data.total_cart_items);                
+                console.log(data.total_cart_items);
                 document.getElementById('cart-count').textContent = data.total_cart_items;
             }).catch(error => {
                 console.error(error);
