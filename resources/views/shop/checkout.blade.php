@@ -210,7 +210,6 @@
                                         <td colspan="3">Subtotal</td>
                                         <td><span class="text-primary">{{ $subTotal }}</span></td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -274,6 +273,8 @@
 
                 if (!isChecked) {
                     shippingField.value = billingField.value;
+                    // disable all shipping fields
+                    shippingField.setAttribute("disabled", "disabled");
                 } else {
                     shippingField.value = "";
                 }
