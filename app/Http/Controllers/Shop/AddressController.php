@@ -40,8 +40,10 @@ class AddressController extends Controller
             $this->saveAddress($request, 'shipping')->save();
         } else {
             $billingAddress = $this->saveAddress($request, 'billing');
+
             $shippingAddress = $billingAddress->replicate();
             $shippingAddress->address_type = 'shipping';
+
             $billingAddress->save();
             $shippingAddress->save();
         }
@@ -102,7 +104,7 @@ class AddressController extends Controller
         $address = Address::where('user_id', Auth::id())->where('address_type', $type)->first();
         if ($address) {
 
-            dd($address);
+            // dd($address);
 
             $address->first_name = $request->input("{$type}_first_name");
             $address->last_name = $request->input("{$type}_last_name");
@@ -127,7 +129,6 @@ class AddressController extends Controller
         $address->city = $request->input("{$type}_city");
         $address->post_code = $request->input("{$type}_zip");
         $address->address_type = $type;
-
 
         return $address;
     }
