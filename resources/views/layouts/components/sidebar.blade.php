@@ -2,14 +2,14 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading fw-bold text-white">Core</div>
-            <a class="nav-link" href="{{ route('admin.dashboard') }}">
+            <a class="nav-link {{ Request::segment(2) == 'dashboard' ? 'bg-primary text-white' : '' }}" href="{{ route('admin.dashboard') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
             <div class="sb-sidenav-menu-heading fw-bold text-white">Ecommerce</div>
 
             {{-- products drop down --}}
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProducts"
+            <a class="nav-link collapsed {{ Request::segment(2) == 'products' ? 'bg-primary text-white' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProducts"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
                 Products
@@ -25,7 +25,7 @@
             </div>
 
             {{-- brands drop down --}}
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBrands"
+            <a class="nav-link collapsed {{ Request::segment(2) == 'brands' ? 'bg-primary text-white' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBrands"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                 Brands
@@ -39,7 +39,7 @@
             </div>
 
             {{-- categories drop down --}}
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories"
+            <a class="nav-link collapsed {{ Request::segment(2) == 'categories' ? 'bg-primary text-white' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                 Categories
@@ -53,13 +53,13 @@
                 </nav>
             </div>
             {{-- Settings drop down --}}
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories"
+            <a class="nav-link collapsed {{ Request::segment(2) == 'settings' ? 'bg-primary text-white' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSettings"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
                 Settings
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse {{ Request::segment(2) == 'settings' ? 'show' : '' }}" id="collapseCategories" aria-labelledby="headingOne"
+            <div class="collapse {{ Request::segment(2) == 'settings' ? 'show' : '' }}" id="collapseSettings" aria-labelledby="headingOne"
                 data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ route('admin.settings') }}">General</a>

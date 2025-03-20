@@ -1,0 +1,40 @@
+:root{
+    --primary: #0b5ed7;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+    --white: #fff;
+    --black: #000;
+    --gray-100: #f7fafc;
+    --gray-200: #edf2f7;
+    --gray-300: #e2e8f0;
+    --gray-400: #cbd5e0;
+    --gray-500: #a0aec0;
+    --gray-600: #718096;
+    --gray-700: #4a5568;
+    --gray-800: #2d3748;
+    --gray-900: #1a202c;
+    --primary-rgb: 78, 115, 223;
+    --secondary-rgb: 133, 135, 150;
+    --success-rgb: 28, 200, 138;
+    --info-rgb: 54, 185, 204;
+    --warning-rgb: 246, 194, 62;
+    --danger-rgb: 231, 74, 59;
+    --light-rgb: 248, 249, 252;
+    --dark-rgb: 90, 92, 105;
+    --white-rgb: 255, 255, 255;
+    --black-rgb: 0, 0, 0;
+    --gray-100-rgb: 247, 250, 252;
+    --gray-200-rgb: 237, 242, 247;
+    --gray-300-rgb: 226, 232, 240;
+    --gray-400-rgb: 203, 213, 224;
+    --gray-500-rgb: 160, 174, 192;
+    --gray-600-rgb: 113, 128, 150;
+    --gray-700-rgb: 74, 85, 104;
+    --gray-800-rgb: 45, 55, 72;
+    --gray-900-rgb:
+}

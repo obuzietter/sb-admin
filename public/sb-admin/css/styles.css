@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* @import url("./theme.css"); */
 /*!
 * Start Bootstrap - SB Admin v7.0.7 (https://startbootstrap.com/template/sb-admin)
 * Copyright 2013-2023 Start Bootstrap
@@ -321,8 +322,8 @@ caption {
 }
 
 th {
-  text-align: inherit;
   text-align: -webkit-match-parent;
+  text-align: inherit;
 }
 
 thead,
@@ -11038,8 +11039,8 @@ body {
 .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
   color: #fff;
   scale: 1.1; 
-  background-color: #0b5ed7;
-  border-radius: .25rem;
+  background-color: var(--bs-primary);
+  /* border-radius: .25rem; */
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover::before{
   content: "👍";
