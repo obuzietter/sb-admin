@@ -67,5 +67,36 @@ class SettingController extends Controller
         //
     }
 
-   
+   public function getGeneralSettings()
+    {
+        $company = Company::first();
+        return view('admin.settings.general', compact('company'));
+    }
+
+    public function getEmailSettings()
+    {
+
+        return view('admin.settings.email');
+    }
+    public function getAppearanceSettings()
+    {
+
+        return view('admin.settings.appearance');
+    }
+    public function getPaymentSettings()
+    {
+
+        return view('admin.settings.payment');
+    }
+    public function getShippingSettings()
+    {
+
+        return view('admin.settings.shipping');
+    }
+    public function getStoreSettings()
+    {
+
+        return view('admin.settings.store');
+    }
+
 }

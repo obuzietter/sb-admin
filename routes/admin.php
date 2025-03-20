@@ -71,8 +71,17 @@ Route::prefix('admin')->group(function () {
         Route::post('categories/update-order', [CategoryController::class, 'updateOrder'])->name('admin.categories.updateOrder');
 
         #settings routes
-        Route::get('settings/general', [SettingController::class, 'index'])->name('admin.settings');
+        Route::get('settings', [SettingController::class, 'index'])->name('admin.settings');
+        Route::get('settings/general', [SettingController::class, 'getGeneralSettings'])->name('admin.settings.general');
+        Route::get('settings/email', [SettingController::class, 'getEmailSettings'])->name('admin.settings.email');
+        Route::get('settings/appearance', [SettingController::class, 'getAppearanceSettings'])->name('admin.settings.appearance');
+        Route::get('settings/payment', [SettingController::class, 'getPaymentSettings'])->name('admin.settings.payment');
+        Route::get('settings/shipping', [SettingController::class, 'getShippingSettings'])->name('admin.settings.shipping');
+        Route::get('settings/store', [SettingController::class, 'getStoreSettings'])->name('admin.settings.store');
+
         Route::post('settings/general/update-logo', [CompanyController::class, 'updateLogo'])->name('admin.settings.update-logo');
+        Route::post('settings/general/update-info', [CompanyController::class, 'updateInfo'])->name('admin.settings.update-info');
+
 
 
 

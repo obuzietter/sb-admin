@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Products')
+@section('title', 'Settings')
 
 @section('content')
     <nav aria-label="breadcrumb">
@@ -9,47 +9,140 @@
             <li class="breadcrumb-item active">Settings</li>
         </ol>
     </nav>
-
-    <!-- Success Message -->
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    <!-- Error Messages -->
-    @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    <div class="card shadow-lg border-0 rounded-3" style="max-width: 400px; margin: auto;">
-        <h5 class="card-header bg-success text-white text-center">Change Logo</h5>
-        <div class="card-body text-center">
-            <h5 class="card-title">Update Your Company Logo</h5>
-    
-            <div class="image border rounded-circle p-2 mx-auto" style="width: 120px; height: 120px;">
-                <img src="{{asset('/storage/'.$company->logo)}}" 
-                    alt="Company Logo" class="img-fluid rounded-circle" style="width: 100%; height: 100%;">
-            </div>
-    
-            <form action="{{route('admin.settings.update-logo')}}" method="POST" enctype="multipart/form-data" class="mt-3">
-                @csrf
-                <div class="mb-3">
-                    <label for="logo" class="form-label fw-bold">Choose Logo</label>
-                    <input type="file" class="form-control" id="logo" name="logo" required>
+   
+    <div class="container">
+        <h4 class="mb-3">Common</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-tools fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="{{route('admin.settings.general')}}" class="fw-bold text-decoration-none">General</a>
+                            <p class="small text-muted mb-0">Update general settings & license.</p>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success w-100">Upload Logo</button>
-            </form>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-envelope-open-text fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="{{route('admin.settings.email')}}" class="fw-bold text-decoration-none">Email</a>
+                            <p class="small text-muted mb-0">Manage email settings & templates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-photo-video fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="#" class="fw-bold text-decoration-none">Media</a>
+                            <p class="small text-muted mb-0">Manage and upload media files.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-palette fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="{{route('admin.settings.appearance')}}" class="fw-bold text-decoration-none">Appearance</a>
+                            <p class="small text-muted mb-0">Customize site themes & layout.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-link fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="#" class="fw-bold text-decoration-none">Permalink</a>
+                            <p class="small text-muted mb-0">Configure URL structures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <h4 class="mt-4 mb-3">Localization</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-language fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="#" class="fw-bold text-decoration-none">Languages</a>
+                            <p class="small text-muted mb-0">Manage site languages & translations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-globe fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="#" class="fw-bold text-decoration-none">Locales</a>
+                            <p class="small text-muted mb-0">Download & import localization files.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <h4 class="mt-4 mb-3">Ecommerce</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-store fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="{{route('admin.settings.store')}}" class="fw-bold text-decoration-none">Store Settings</a>
+                            <p class="small text-muted mb-0">Update store information & policies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-money-bill-wave fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="{{route('admin.settings.payment')}}" class="fw-bold text-decoration-none">Payments</a>
+                            <p class="small text-muted mb-0">Manage payment gateways & methods.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-shipping-fast fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="{{route('admin.settings.shipping')}}" class="fw-bold text-decoration-none">Shipping</a>
+                            <p class="small text-muted mb-0">Update shipping zones & rates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fas fa-user-shield fs-3 text-primary me-3"></i>
+                        <div>
+                            <a href="#" class="fw-bold text-decoration-none">Security</a>
+                            <p class="small text-muted mb-0">Manage roles, permissions & access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-
 @endsection
