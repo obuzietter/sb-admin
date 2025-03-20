@@ -30,24 +30,31 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate billing address
+        Address::validateAddress($request, 'billing');
 
+        $flag = $request->ship_to_different_address == 1 ? true : false;
 
-        $this->validateAddress($request, 'billing');
+        if ($flag) {
+            // Validate shipping address if different from billing
+            Address::validateAddress($request, 'shipping');
 
-        if ($request->ship_to_different_address == 1) {
-            $this->validateAddress($request, 'shipping');
-            $this->saveAddress($request, 'billing')->save();
-            $this->saveAddress($request, 'shipping')->save();
-        } else {
-            $billingAddress = $this->saveAddress($request, 'billing');
+            // Save shipping address
+            $shippingAddress = Address::saveShippingAddress($request, 'shipping', $flag);
+            $shippingAddress->save();
 
-            $shippingAddress = $billingAddress->replicate();
-            $shippingAddress->address_type = 'shipping';
-
+            // Save billing address
+            $billingAddress = Address::saveBillingAddress($request);
             $billingAddress->save();
+        } else {
+            // Save billing address
+            $billingAddress = Address::saveBillingAddress($request);
+            $billingAddress->save();
+
+            // Save shipping address
+            $shippingAddress = Address::saveShippingAddress($request, 'shipping', $flag);
             $shippingAddress->save();
         }
-
 
         return redirect()->route('checkout');
     }
@@ -101,10 +108,11 @@ class AddressController extends Controller
     private function saveAddress(Request $request, $type)
     {
 
-        $address = Address::where('user_id', Auth::id())->where('address_type', $type)->first();
+        $address = Address::where('user_id', Auth::id())->where('address_type', $type)->get();
         if ($address) {
 
-            // dd($address);
+
+            dd($address);
 
             $address->first_name = $request->input("{$type}_first_name");
             $address->last_name = $request->input("{$type}_last_name");
@@ -114,7 +122,7 @@ class AddressController extends Controller
             $address->physical_address = $request->input("{$type}_address");
             $address->city = $request->input("{$type}_city");
             $address->post_code = $request->input("{$type}_zip");
-            
+
             return $address;
         }
 
