@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\BackOffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Company;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -13,7 +14,9 @@ class SettingController extends Controller
     public function index()
     {
         //
-        return view('admin.settings.index');
+        $company = Company::first();
+        // dd($company);
+        return view('admin.settings.index', compact('company'));
     }
 
     /**
@@ -63,4 +66,6 @@ class SettingController extends Controller
     {
         //
     }
+
+   
 }

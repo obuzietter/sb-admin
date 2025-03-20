@@ -36,11 +36,11 @@
             <h5 class="card-title">Update Your Company Logo</h5>
     
             <div class="image border rounded-circle p-2 mx-auto" style="width: 120px; height: 120px;">
-                <img src="https://cdn-icons-png.freepik.com/256/11918/11918707.png" 
-                    alt="Company Logo" class="img-fluid rounded-circle" style="max-width: 100px; height: auto;">
+                <img src="{{asset('/storage/'.$company->logo)}}" 
+                    alt="Company Logo" class="img-fluid rounded-circle" style="width: 100%; height: 100%;">
             </div>
     
-            <form action="" method="POST" enctype="multipart/form-data" class="mt-3">
+            <form action="{{route('admin.settings.update-logo')}}" method="POST" enctype="multipart/form-data" class="mt-3">
                 @csrf
                 <div class="mb-3">
                     <label for="logo" class="form-label fw-bold">Choose Logo</label>

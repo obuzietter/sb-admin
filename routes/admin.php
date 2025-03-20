@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\BackOffice\BrandController;
 use App\Http\Controllers\Admin\BackOffice\CategoryController;
+use App\Http\Controllers\Admin\BackOffice\CompanyController;
 use App\Http\Controllers\Admin\BackOffice\ProductController;
 use App\Http\Controllers\Admin\BackOffice\SettingController;
 use App\Models\Admin;
@@ -70,7 +71,9 @@ Route::prefix('admin')->group(function () {
         Route::post('categories/update-order', [CategoryController::class, 'updateOrder'])->name('admin.categories.updateOrder');
 
         #settings routes
-        Route::get('settings', [SettingController::class, 'index'])->name('admin.settings');
+        Route::get('settings/general', [SettingController::class, 'index'])->name('admin.settings');
+        Route::post('settings/general/update-logo', [CompanyController::class, 'updateLogo'])->name('admin.settings.update-logo');
+
 
 
     });
