@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\BackOffice\BrandController;
 use App\Http\Controllers\Admin\BackOffice\CategoryController;
 use App\Http\Controllers\Admin\BackOffice\ProductController;
+use App\Http\Controllers\Admin\BackOffice\SettingController;
 use App\Models\Admin;
 use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
@@ -67,5 +68,10 @@ Route::prefix('admin')->group(function () {
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
         Route::get('category-search', [CategoryController::class, 'search'])->name('admin.categories.search');
         Route::post('categories/update-order', [CategoryController::class, 'updateOrder'])->name('admin.categories.updateOrder');
+
+        #settings routes
+        Route::get('settings', [SettingController::class, 'index'])->name('admin.settings');
+
+
     });
 });
