@@ -70,6 +70,7 @@ class Address extends Model
         $shippingAddress->city = $ship_to_different_address ?  $request->input("{$type}_city") : $request->input("billing_city");
         $shippingAddress->post_code = $ship_to_different_address ?  $request->input("{$type}_zip") : $request->input("billing_zip");
         $shippingAddress->address_type = $type;
+        $shippingAddress->order_notes = $request->input("order_notes") ?? null;
 
         return $shippingAddress;
     }

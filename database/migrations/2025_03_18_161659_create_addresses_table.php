@@ -34,6 +34,8 @@ return new class extends Migration
 
             $table->enum('address_type', ['billing', 'shipping'])->default('billing');
 
+            $table->text('order_notes')->nullable();
+
             $table->timestamps();
         });
     }

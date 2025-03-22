@@ -15,20 +15,20 @@
     </div>
     <!-- Single Page Header End -->
 
-   
+
     <!-- Checkout Page Start -->
     <div class="container-fluid py-4">
         <div class="container py-2">
             @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <form action="{{ route('address.store') }}" method="POST">
                 @csrf
                 <div class="row g-5">
@@ -193,7 +193,7 @@
                                 placeholder="Order Notes (Optional)">{{ old('order_notes') }}</textarea>
                         </div>
                     </div>
-
+                    {{-- CART SUMMARY --}}
                     <div class="col-md-12 col-lg-6 col-xl-5">
                         <div class="table-responsive">
                             <table class="table">

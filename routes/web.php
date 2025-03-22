@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Shop\AddressController;
 use App\Http\Controllers\Shop\CartItemController;
+use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use Illuminate\Http\Request;
@@ -58,3 +59,5 @@ Route::middleware('auth:user')->group(function () {
 
     Route::post('/address/store', [AddressController::class, 'store'])->name('address.store');
 });
+
+
