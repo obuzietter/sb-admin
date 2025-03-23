@@ -1,9 +1,9 @@
-<nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-3">
+<nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-light shadow-sm px-3">
     <!-- Navbar Brand -->
-    <a class="navbar-brand ps-3 fw-bold text-uppercase" href="{{ route('admin.dashboard') }}">Admin Panel</a>
+    <a class="navbar-brand ps-3 fw-bold text-uppercase text-dark" href="{{ route('admin.dashboard') }}">Admin Panel</a>
 
     <!-- Sidebar Toggle -->
-    <button class="btn btn-outline-light btn-sm order-1 order-lg-0 me-3 me-lg-0" id="sidebarToggle" href="#!">
+    <button class="btn btn-outline-dark btn-sm order-1 order-lg-0 me-3 me-lg-0 text-dark" id="sidebarToggle" href="#!">
         <i class="fas fa-bars"></i>
     </button>
 

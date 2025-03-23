@@ -69,9 +69,9 @@
 
         </div>
     </div>
-    <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        <div class="small text-info">
+    <div class="sb-sidenav-footer bg-light">
+        <div class="small text-dark">Logged in as:</div>
+        <div class="small text-primary fw-bold">
             {{ Auth::guard('admin')->user()->first_name }} {{ Auth::guard('admin')->user()->last_name }}
         </div>
 
