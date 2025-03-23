@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\BackOffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -13,6 +14,8 @@ class CustomerController extends Controller
     public function index()
     {
         //
+        $customers = User::paginate(10);
+        return view('admin.customers.index', compact('customers'));
     }
 
     /**
@@ -21,6 +24,7 @@ class CustomerController extends Controller
     public function create()
     {
         //
+        return view('admin.customers.create');
     }
 
     /**
@@ -28,7 +32,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate the request
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+        ]);
+
+        //store the data
+        User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        //redirect to the index page
+        return redirect()->route('admin.customers')->with('success', 'Customer created successfully');
     }
 
     /**

@@ -58,11 +58,11 @@
             </div>
             {{-- Customers --}}
             <a class="nav-link collapsed {{ Request::segment(2) == 'customers' ? 'bg-primary text-white' : '' }}"
-                href="" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false"
+                href="{{route('admin.customers')}}" aria-expanded="false"
                 aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon text-white"><i class="fas fa-columns"></i></div>
                 Customers
-                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                {{-- <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div> --}}
             </a>
             <div class="sb-sidenav-menu-heading fw-bold text-white">Configurations</div>
             {{-- Settings drop down --}}

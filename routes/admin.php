@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\BackOffice\BrandController;
 use App\Http\Controllers\Admin\BackOffice\CategoryController;
 use App\Http\Controllers\Admin\BackOffice\CompanyController;
+use App\Http\Controllers\Admin\BackOffice\CustomerController;
 use App\Http\Controllers\Admin\BackOffice\ProductController;
 use App\Http\Controllers\Admin\BackOffice\SettingController;
 use App\Models\Admin;
@@ -78,6 +79,17 @@ Route::prefix('admin')->group(function () {
         Route::get('settings/payment', [SettingController::class, 'getPaymentSettings'])->name('admin.settings.payment');
         Route::get('settings/shipping', [SettingController::class, 'getShippingSettings'])->name('admin.settings.shipping');
         Route::get('settings/store', [SettingController::class, 'getStoreSettings'])->name('admin.settings.store');
+
+        #customer routes
+        Route::get('customers', [CustomerController::class, 'index'])->name('admin.customers');
+        Route::get('customers/create', [CustomerController::class, 'create'])->name('admin.customers.create');
+        Route::get('customers/{customer}', [CustomerController::class, 'show'])->name('admin.customers.show');
+        Route::get('customers/{customer}/edit', [CustomerController::class, 'edit'])->name('admin.customers.edit');
+        Route::put('customers/{customer}', [CustomerController::class, 'update'])->name('admin.customers.update');
+        Route::post('customers', [CustomerController::class, 'store'])->name('admin.customers.store');
+        Route::delete('customers/{customer}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
+        Route::get('customer-search', [CustomerController::class, 'search'])->name('admin.customers.search');
+
 
         Route::post('settings/general/update-logo', [CompanyController::class, 'updateLogo'])->name('admin.settings.update-logo');
         Route::post('settings/general/update-info', [CompanyController::class, 'updateInfo'])->name('admin.settings.update-info');
