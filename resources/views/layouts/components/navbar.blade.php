@@ -1,4 +1,4 @@
-<nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-light shadow-sm px-3">
+<nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-light  px-3">
     <!-- Navbar Brand -->
     <a class="navbar-brand ps-3 fw-bold text-uppercase text-dark" href="{{ route('admin.dashboard') }}">Admin Panel</a>
 
@@ -21,7 +21,7 @@
     <ul class="navbar-nav ms-auto">
         <!-- User Dropdown -->
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown">
                 <i class="fas fa-user fa-fw me-1"></i> Profile
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 px-3">
