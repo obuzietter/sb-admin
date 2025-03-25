@@ -42,10 +42,7 @@ Route::middleware('auth:user')->group(function () {
 
     Route::get('/products', [PagesController::class, 'products'])->name('products');
 
-    Route::get('/product-detail', function () {
-
-        return view('shop.product-detail');
-    })->name('product.show');
+    Route::get('/products/product-detail/{id}', [PagesController::class, 'showProduct'])->name('product.show');
 
     Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 

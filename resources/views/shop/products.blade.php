@@ -188,26 +188,29 @@
                         {{-- Product Cards --}}
                         <div class="col-lg-9">
                             <div class="row g-4">
-                                
+
 
                                 @forelse ($products as $product)
                                     <div class="col-md-6 col-lg-6 col-xl-4 ">
                                         <div class="rounded position-relative fruite-item d-flex flex-column">
                                             <div class="fruite-img">
                                                 <img src="{{ asset('storage/' . $product->image) }}"
-                                                    class="img-fluid w-100 rounded-top" alt="">
+                                                    class="img-fluid rounded-top" alt="">
                                             </div>
                                             <div class="text-white fw-bold bg-danger px-3 py-1 rounded position-absolute"
                                                 style="top: 10px; left: 10px;">NEW</div>
                                             <div
                                                 class="p-4 rounded-bottom border shadow-sm flex-grow-1 d-flex flex-column justify-content-between bg-white">
                                                 <!-- Product Name -->
-                                                <h5 class="text-dark fw-semibold mb-3">{{ $product->name }}</h5>
+                                                <a href="{{ route('product.show', ['id' => $product->id]) }}" class="text-decoration-none">
+                                                    <h5 class="text-dark fw-semibold mb-3">{{ $product->name }}</h5>
+                                                </a>
+                                                
 
                                                 <!-- Price & Cart Button -->
                                                 <div
                                                     class="d-flex flex-row justify-content-between align-items-center flex-wrap">
-                                                    <span class="text-primary mb-0 text-decoration-underline">
+                                                    <span class="text-secondary fs-5 fw-bold">
                                                         KSH {{ number_format($product->price, 2) }}
                                                     </span>
                                                     <button class="btn btn-primary rounded-pill d-flex align-items-center"
@@ -220,7 +223,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                 @empty
                                     <h1>No products found</h1>
                                 @endforelse
@@ -298,7 +301,7 @@
         }
 
         function updateCartCount(count) {
-            document.getElementById('cart-count').innerText = count;            
+            document.getElementById('cart-count').innerText = count;
         }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

@@ -320,11 +320,13 @@
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
-    height: 40%;
+    height: 75%;
 }
 
 .fruite .fruite-item .fruite-img img {
     transition: 0.5s;
+    width: 100%;
+    object-fit: contain;
 }
 
 .fruite .fruite-item .fruite-img img:hover {
