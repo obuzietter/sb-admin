@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Shop\AddressController;
 use App\Http\Controllers\Shop\CartItemController;
+use App\Http\Controllers\Shop\ProfileController;
 use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
@@ -33,7 +34,9 @@ Route::middleware('guest:user')->group(function () {
 Route::middleware('auth:user')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+    Route::post('update-password', [AuthController::class, 'updatePassword'])->name('user.password.update');
     Route::get('profile', [PagesController::class, 'profile'])->name('profile');
+    Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('user.profile.update');
 
     Route::get('/', [PagesController::class, 'home'])->name('home');
 
