@@ -23,7 +23,7 @@
                 <div class="card-body text-center">
                     <img src="https://img.freepik.com/free-vector/user-blue-gradient_78370-4692.jpg?uid=R97350360&ga=GA1.1.569336961.1721632028&semt=ais_hybrid" class="rounded-circle img-fluid" alt="User Image" width="75" height="75" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;">
                     <h5 class="mt-3">John Doe</h5>
-                    <p class="text-muted">johndoe@example.com</p>
+                    
                     <button class="btn btn-primary btn-sm">Edit Profile</button>
                 </div>
             </div>
@@ -36,10 +36,9 @@
                     Account Details
                 </div>
                 <div class="card-body">
-                    <p><strong>Name:</strong> John Doe</p>
-                    <p><strong>Email:</strong> johndoe@example.com</p>
-                    <p><strong>Phone:</strong> +123 456 7890</p>
-                    <p><strong>Address:</strong> 123 Main St, City, Country</p>
+                    <p><strong>Name:</strong> {{ $user->first_name .' '. $user->last_name }}</p>
+                    <p><strong>Email:</strong> {{ $user->email }}</p>
+                    <p><strong>Phone:</strong> {{ $user->phone }}</p>
                 </div>
             </div>
 

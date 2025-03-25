@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Shop\CartItem;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,9 +110,11 @@ class PagesController extends Controller
     }
 
     public function profile() {
+        $user = User::find($this->userId);
+
         $totalCartItems = CartItem::where('user_id', $this->userId)
             ->orWhere('session_id', $this->sessionId)
             ->sum('quantity');
-        return view('shop.profile', compact('totalCartItems'));
+        return view('shop.profile', compact('totalCartItems', 'user'));
     }
 }
