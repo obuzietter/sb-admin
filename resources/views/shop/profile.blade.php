@@ -108,7 +108,7 @@
                             data-bs-target="#changePasswordModal">
                             Change Password
                         </button>
-                        <button class="btn btn-outline-warning">Manage Payment Methods</button>
+                        
                         {{-- logout form --}}
                         <form action="{{ route('user.logout') }}" method="POST" class="d-inline">
                             @csrf
@@ -204,6 +204,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
 

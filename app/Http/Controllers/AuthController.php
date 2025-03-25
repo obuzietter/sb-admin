@@ -128,8 +128,7 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->old_password, $user->password)) {
             return back()->withErrors(['old_password' => 'Incorrect old password.']);
         }
-
-        
+      
     
         try {
             $user->password = Hash::make($request->password);
