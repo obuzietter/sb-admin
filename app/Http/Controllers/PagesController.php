@@ -38,7 +38,9 @@ class PagesController extends Controller
 
         $categories = Category::all();
         $products = Product::where('is_enabled', 1)->paginate(20);
-        return view('shop.products', compact('categories', 'products', 'totalCartItems'));
+        $featuredProducts = Product::where('is_enabled', 1)->where('is_featured', 1)->get();
+        return view('shop.products', compact('categories', 'products', 'totalCartItems', 'featuredProducts'));
+        
     }
     public function productSearch(Request $request)
     {

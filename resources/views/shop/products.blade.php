@@ -110,63 +110,32 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <h4 class="mb-3">Featured products</h4>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="/shop/img/featur-1.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
+                                    @forelse ($featuredProducts as $featuredProduct)
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <div class="rounded me-4" style="width: 100px; height: 100px; flex-shrink: 0;">
+                                                <img src="{{ asset('storage/' . $featuredProduct->image) }}"
+                                                    class="img-fluid rounded" alt="">
                                             </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="/shop/img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                            <div>
+                                                <h6 class="mb-2">{{ $featuredProduct->name }}</h6>
+                                                <div class="d-flex mb-2 ">
+                                                    <i class="fa fa-star text-primary"></i>
+                                                    <i class="fa fa-star text-primary"></i>
+                                                    <i class="fa fa-star text-primary"></i>
+                                                    <i class="fa fa-star text-primary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+
+                                                </div>
+                                                <div class="d-flex mb-2">
+                                                    <h5 class="me-2">KES {{ number_format($featuredProduct->price) }}
+                                                    </h5>
+                                                    {{-- <h5 class="text-danger text-decoration-line-through">4.11 $</h5> --}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="/shop/img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @empty
+                                        <h1>No featured products found</h1>
+                                    @endforelse
                                     <div class="d-flex justify-content-center my-4">
                                         <a href="#"
                                             class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew
@@ -202,10 +171,11 @@
                                             <div
                                                 class="p-4 rounded-bottom border shadow-sm flex-grow-1 d-flex flex-column justify-content-between bg-white">
                                                 <!-- Product Name -->
-                                                <a href="{{ route('product.show', ['id' => $product->id]) }}" class="text-decoration-none">
+                                                <a href="{{ route('product.show', ['id' => $product->id]) }}"
+                                                    class="text-decoration-none">
                                                     <h5 class="text-dark fw-semibold mb-3">{{ $product->name }}</h5>
                                                 </a>
-                                                
+
 
                                                 <!-- Price & Cart Button -->
                                                 <div
