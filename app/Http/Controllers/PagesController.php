@@ -59,6 +59,15 @@ class PagesController extends Controller
 
         return view('shop.products', compact('categories', 'products', 'totalCartItems'));
     }
+    public function showProduct($id)
+    {
+        $categories = Category::all();
+        $product = Product::find($id);
+        $totalCartItems = CartItem::where('user_id', $this->userId)
+            ->orWhere('session_id', $this->sessionId)
+            ->sum('quantity');
+        return view('shop.product-detail', compact('product', 'totalCartItems', 'categories'));
+    }
 
     public function about()
     {
@@ -120,14 +129,7 @@ class PagesController extends Controller
         return view('shop.profile', compact('totalCartItems', 'user'));
     }
 
-    // function to show a single product
+    
 
-    public function showProduct($id)
-    {
-        $product = Product::find($id);
-        $totalCartItems = CartItem::where('user_id', $this->userId)
-            ->orWhere('session_id', $this->sessionId)
-            ->sum('quantity');
-        return view('shop.product-detail', compact('product', 'totalCartItems'));
-    }
+  
 }

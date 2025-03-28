@@ -243,30 +243,17 @@
                                             <span>(3)</span>
                                         </div>
                                     </li>
+                                    @forelse ($categories as $category)
                                     <li>
                                         <div class="d-flex justify-content-between fruite-name">
-                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                            <span>(5)</span>
+                                            <a href="#"><i class="bi bi-star-fill"></i>
+                                                {{ $category->name }}</a>
+                                            <span>(3)</span>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="d-flex justify-content-between fruite-name">
-                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                            <span>(2)</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex justify-content-between fruite-name">
-                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                            <span>(8)</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex justify-content-between fruite-name">
-                                            <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                            <span>(5)</span>
-                                        </div>
-                                    </li>
+                                @empty
+                                    <h1>No categories found</h1>
+                                @endforelse
                                 </ul>
                             </div>
                         </div>
