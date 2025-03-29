@@ -40,14 +40,13 @@ class PagesController extends Controller
         $products = Product::where('is_enabled', 1)->paginate(20);
         $featuredProducts = Product::where('is_enabled', 1)->where('is_featured', 1)->get();
         return view('shop.products', compact('categories', 'products', 'totalCartItems', 'featuredProducts'));
-        
     }
     public function productSearch(Request $request)
     {
+        $featuredProducts = Product::where('is_enabled', 1)->where('is_featured', 1)->get();
         $totalCartItems = CartItem::where('user_id', $this->userId)
             ->orWhere('session_id', $this->sessionId)
             ->sum('quantity');
-
         $categories = Category::all();
         $search = $request->search;
         $products = Product::where(function ($query) use ($search) {
@@ -57,7 +56,7 @@ class PagesController extends Controller
             ->where('is_enabled', 1) // Ensures only enabled products are fetched
             ->paginate(20);
 
-        return view('shop.products', compact('categories', 'products', 'totalCartItems'));
+        return view('shop.products', compact('categories', 'products', 'totalCartItems', 'featuredProducts'));
     }
     public function showProduct($id)
     {
@@ -97,7 +96,7 @@ class PagesController extends Controller
         $totalCartItems = CartItem::where('user_id', $this->userId)
             ->orWhere('session_id', $this->sessionId)
             ->sum('quantity');
-        
+
         $cartItems = CartItem::where('user_id', $userId)
             ->orWhere('session_id', $sessionId)->get();
 
@@ -120,7 +119,8 @@ class PagesController extends Controller
         return view('shop.checkout', compact('totalCartItems', 'cartItems', 'subTotal'));
     }
 
-    public function profile() {
+    public function profile()
+    {
         $user = User::find($this->userId);
 
         $totalCartItems = CartItem::where('user_id', $this->userId)
@@ -128,8 +128,4 @@ class PagesController extends Controller
             ->sum('quantity');
         return view('shop.profile', compact('totalCartItems', 'user'));
     }
-
-    
-
-  
 }

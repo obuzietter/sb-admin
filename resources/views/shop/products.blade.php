@@ -26,9 +26,17 @@
                     <div class="row g-4">
                         <div class="col-xl-3">
                             <div class="input-group w-100 mx-auto d-flex">
-                                <input type="search" class="form-control p-3" placeholder="keywords"
-                                    aria-describedby="search-icon-1">
-                                <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                                <form action="{{ route('product.search') }}" method="GET" class="input-group w-100 mx-auto d-flex">
+                                    @csrf
+                                    <input type="search" class="form-control p-3" placeholder="keywords"
+                                        aria-describedby="search-icon-1">
+                                    <button type="submit" class="btn p-0 border-0 shadow-none"><span
+                                            id="search-icon-1" class="input-group-text p-3 px-4 d-inline-block"><i
+                                                class="fa fa-search"></i></span>
+                                    </button>
+                                      
+                                </form>
+
                             </div>
                         </div>
                         <div class="col-6"></div>
@@ -112,7 +120,8 @@
                                     <h4 class="mb-3">Featured products</h4>
                                     @forelse ($featuredProducts as $featuredProduct)
                                         <div class="d-flex align-items-center justify-content-start">
-                                            <div class="rounded me-4" style="width: 100px; height: 100px; flex-shrink: 0;">
+                                            <div class="rounded me-4"
+                                                style="width: 100px; height: 100px; flex-shrink: 0;">
                                                 <img src="{{ asset('storage/' . $featuredProduct->image) }}"
                                                     class="img-fluid rounded" alt="">
                                             </div>
