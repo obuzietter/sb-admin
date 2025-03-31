@@ -46,7 +46,8 @@
             </div>
 
             <!-- Search Field -->
-            <form action="{{ route('admin.customers.search') }}" method="GET" class="d-flex gap-2 align-items-center justify-content-end flex-grow-1">
+            <form action="{{ route('admin.customers.search') }}" method="GET"
+                class="d-flex gap-2 align-items-center justify-content-end flex-grow-1">
                 <input type="search" name="search" class="form-control" placeholder="Search by Name | Email | Phone"
                     value="{{ request('search') }}" style="min-width: 200px; max-width: 300px;">
                 <button class="btn btn-outline-success d-flex align-items-center gap-1" type="submit">
@@ -96,7 +97,7 @@
 
                                 <div class="d-flex gap
                                 -2">
-                                    <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-primary"><i
+                                    <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-primary me-2"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
 
                                     <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST"
@@ -111,7 +112,7 @@
                                 </div>
                             </td>
 
-                    @empty
+                        @empty
                         <tr>
                             <td colspan="7">No Customers found</td>
                         </tr>
@@ -122,6 +123,27 @@
             </table>
         </div>
     </div>
+    <!-- Include SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        function deleteCustomer(customerID) {
+            //prevent the form from submitting
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(customerID).submit();
+                }
+            })
+        }
+    </script>
 
 @endsection

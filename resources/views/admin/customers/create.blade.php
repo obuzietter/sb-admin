@@ -7,7 +7,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb mt-4 mb-4">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.customers') }}">Products</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.customers') }}">Customers</a></li>
             <li class="breadcrumb-item active" aria-current="page">Create Customer</li>
         </ol>
     </nav>
