@@ -53,13 +53,13 @@
                 <div class="row">
                     <div class="col mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $customer->email }}"
-                            required>
+                        <input type="email" class="form-control" id="email" name="email"
+                            value="{{ $customer->email }}" required>
                     </div>
                     <div class="col mb-3">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $customer->phone }}"
-                            required>
+                        <input type="text" class="form-control" id="phone" name="phone"
+                            value="{{ $customer->phone }}" required>
                     </div>
                 </div>
                 {{-- password field with label and a generate password icon --}}
@@ -77,11 +77,11 @@
                             <button class="btn btn-outline-primary" type="button" id="generate-password">
                                 <i class="fa-solid fa-key"></i>
                             </button>
-                            
-                           
+
+
                         </div>
                     </div>
-                    
+
                 </div>
                 <button type="submit" class="btn btn-primary">Update Customer</button>
             </form>
@@ -91,7 +91,7 @@
     <!-- Include SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('view-password').addEventListener('click', function () {
+        document.getElementById('view-password').addEventListener('click', function() {
             let password = document.getElementById('password');
             if (password.type === 'password') {
                 password.type = 'text';
@@ -99,13 +99,13 @@
                 password.type = 'password';
             }
         });
-        document.getElementById('generate-password').addEventListener('click', function () {
+        document.getElementById('generate-password').addEventListener('click', function() {
             let password = Math.random().toString(36).slice(-8);
             console.log(password);
-            
+
             document.getElementById('password').value = password;
         });
-        document.getElementById('copy-password').addEventListener('click', function () {
+        document.getElementById('copy-password').addEventListener('click', function() {
             let password = document.getElementById('password');
             password.select();
             document.execCommand('copy');

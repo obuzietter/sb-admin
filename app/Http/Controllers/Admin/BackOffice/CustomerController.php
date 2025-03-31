@@ -109,4 +109,20 @@ class CustomerController extends Controller
         $customer->delete();
         return redirect()->route('admin.customers')->with('success', 'Customer deleted successfully');
     }
+
+    /**
+     * Search for a customer by name, email or phone number.
+     */
+    public function search(Request $request)
+    {
+        //
+        $search = $request->input('search');
+        $customers = User::where('first_name', 'LIKE', "%$search%")
+            ->orWhere('last_name', 'LIKE', "%$search%")
+            ->orWhere('email', 'LIKE', "%$search%")
+            ->orWhere('phone', 'LIKE', "%$search%")
+            ->paginate(10);
+        return view('admin.customers.index', compact('customers'));
+
+    }
 }
