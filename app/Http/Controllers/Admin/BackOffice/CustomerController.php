@@ -68,6 +68,8 @@ class CustomerController extends Controller
     public function edit(string $id)
     {
         //
+        $customer = User::findOrFail($id);
+        return view('admin.customers.edit', compact('customer'));
     }
 
     /**
@@ -76,6 +78,25 @@ class CustomerController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $customer = User::findOrFail($id);
+        //validate the request
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|min:10',
+            'email' => 'required|email|unique:users,email,' . $customer->id,
+            'password' => 'nullable|string|min:8',
+        ]);
+        //update the data
+        $customer->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : $customer->password,
+        ]);
+        //redirect to the index page
+        return redirect()->route('admin.customers')->with('success', 'Customer updated successfully');
     }
 
     /**
