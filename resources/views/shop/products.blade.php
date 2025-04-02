@@ -175,8 +175,8 @@
                                                 <img src="{{ asset('storage/' . $product->image) }}"
                                                     class="img-fluid rounded-top" alt="">
                                             </div>
-                                            <div class="text-white fw-bold bg-danger px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">NEW</div>
+                                            <div class="text-white bg-danger px-1 rounded position-absolute fs-6 fw-bold"
+                                                style="top: 10px; right: 10px;">NEW</div>
                                             <div
                                                 class="p-4 rounded-bottom border shadow-sm flex-grow-1 d-flex flex-column justify-content-between bg-white">
                                                 <!-- Product Name -->
