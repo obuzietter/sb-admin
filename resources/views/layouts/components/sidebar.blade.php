@@ -41,6 +41,22 @@
                 </nav>
             </div>
 
+            {{-- Orders Dropdown --}}
+            <a class="nav-link collapsed {{ Request::segment(2) == 'orders' ? 'bg-primary text-white' : '' }}"
+                href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrders" aria-expanded="false"
+                aria-controls="collapseLayouts">
+                <div class="sb-nav-link-icon text-white"><i class="fas fa-shopping-cart"></i></div>
+                Orders
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse {{ Request::segment(2) == 'orders' ? 'show' : '' }}" id="collapseOrders"
+                aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ route('admin.orders') }}">All Orders</a>
+                    <a class="nav-link" href="{{ route('admin.orders.create') }}">Create Order</a>
+                </nav>
+            </div>
+
             {{-- categories drop down --}}
             <a class="nav-link collapsed {{ Request::segment(2) == 'categories' ? 'bg-primary text-white' : '' }}"
                 href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false"

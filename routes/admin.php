@@ -90,7 +90,21 @@ Route::prefix('admin')->group(function () {
         Route::delete('customers/{customer}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
         Route::get('customer-search', [CustomerController::class, 'search'])->name('admin.customers.search');
 
+        #order routes
+        Route::get('orders', [CustomerController::class, 'orders'])->name('admin.orders');
 
+        Route::get('orders/create', [CustomerController::class, 'createOrder'])->name('admin.orders.create');
+        Route::post('orders', [CustomerController::class, 'storeOrder'])->name('admin.orders.store');
+        Route::get('orders/{order}/edit', [CustomerController::class, 'editOrder'])->name('admin.orders.edit');
+        Route::put('orders/{order}', [CustomerController::class, 'updateOrder'])->name('admin.orders.update');
+        Route::delete('orders/{order}', [CustomerController::class, 'destroyOrder'])->name('admin.orders.destroy');
+        Route::get('order-search', [CustomerController::class, 'searchOrder'])->name('admin.orders.search');
+        Route::get('orders/{order}', [CustomerController::class, 'showOrder'])->name('admin.orders.show');
+        Route::get('orders/{order}/invoice', [CustomerController::class, 'invoice'])->name('admin.orders.invoice');
+        Route::get('orders/{order}/invoice/download', [CustomerController::class, 'downloadInvoice'])->name('admin.orders.invoice.download');
+        Route::get('orders/{order}/invoice/print', [CustomerController::class, 'printInvoice'])->name('admin.orders.invoice.print');
+        Route::get('orders/{order}/invoice/email', [CustomerController::class, 'emailInvoice'])->name('admin.orders.invoice.email');
+        
         Route::post('settings/general/update-logo', [CompanyController::class, 'updateLogo'])->name('admin.settings.update-logo');
         Route::post('settings/general/update-info', [CompanyController::class, 'updateInfo'])->name('admin.settings.update-info');
 
