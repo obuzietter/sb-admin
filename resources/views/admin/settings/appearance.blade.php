@@ -30,34 +30,38 @@
         </div>
     @endif
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header fw-bold">Admin Appearance Settings</div>
-        <div class="card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="logoUpload" class="form-label">Upload Logo</label>
-                    <input type="file" class="form-control" id="logoUpload">
-                </div>
-                <div class="mb-3">
-                    <label for="faviconUpload" class="form-label">Upload Favicon</label>
-                    <input type="file" class="form-control" id="faviconUpload">
-                </div>
-                <div class="mb-3">
-                    <label for="themeColor" class="form-label">Theme Color</label>
-                    <input type="color" class="form-control form-control-color" id="themeColor">
-                </div>
-                <div class="mb-3">
-                    <label for="layout" class="form-label">Layout Style</label>
-                    <select class="form-select" id="layout">
-                        <option selected>Choose layout</option>
-                        <option value="boxed">Boxed</option>
-                        <option value="full-width">Full Width</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </form>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header fw-bold">Admin Appearance Settings</div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="logoUpload" class="form-label">Upload Logo</label>
+                        <input type="file" class="form-control" id="logoUpload">
+                    </div>
+                    <div class="mb-3">
+                        <label for="faviconUpload" class="form-label">Upload Favicon</label>
+                        <input type="file" class="form-control" id="faviconUpload">
+                    </div>
+                    <div class="mb-3">
+                        <label for="primaryColor" class="form-label">Primary Color</label>
+                        <input type="color" class="form-control" id="primaryColor" value="#007bff">
+                    </div>
+                    <div class="mb-3">
+                        <label for="secondaryColor" class="form-label">Secondary Color</label>
+                        <input type="color" class="form-control" id="secondaryColor" value="#6c757d">
+                    </div>
+                    <div class="mb-3">
+                        <label for="layout" class="form-label">Layout Style</label>
+                        <select class="form-select" id="layout">
+                            <option selected>Choose layout</option>
+                            <option value="boxed">Boxed</option>
+                            <option value="full-width">Full Width</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 @endsection
