@@ -30,6 +30,7 @@
         </div>
     @endif
 
+    {{-- this page contains appearaance settings for the admin panel --}}
     <div class="container mt-4">
         <div class="card">
             <div class="card-header fw-bold">Admin Appearance Settings</div>
