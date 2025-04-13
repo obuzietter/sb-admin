@@ -28,45 +28,7 @@ class PagesController extends Controller
             ->sum('quantity');
         return view('shop.home', compact('totalCartItems'));
     }
-    public function products()
-    {
-
-
-        $totalCartItems = CartItem::where('user_id', $this->userId)
-            ->orWhere('session_id', $this->sessionId)
-            ->sum('quantity');
-
-        $categories = Category::all();
-        $products = Product::where('is_enabled', 1)->paginate(20);
-        $featuredProducts = Product::where('is_enabled', 1)->where('is_featured', 1)->get();
-        return view('shop.products', compact('categories', 'products', 'totalCartItems', 'featuredProducts'));
-    }
-    public function productSearch(Request $request)
-    {
-        $featuredProducts = Product::where('is_enabled', 1)->where('is_featured', 1)->get();
-        $totalCartItems = CartItem::where('user_id', $this->userId)
-            ->orWhere('session_id', $this->sessionId)
-            ->sum('quantity');
-        $categories = Category::all();
-        $search = $request->search;
-        $products = Product::where(function ($query) use ($search) {
-            $query->where('name', 'like', "%$search%")
-                ->orWhere('description', 'like', "%$search%");
-        })
-            ->where('is_enabled', 1) // Ensures only enabled products are fetched
-            ->paginate(20);
-
-        return view('shop.products', compact('categories', 'products', 'totalCartItems', 'featuredProducts'));
-    }
-    public function showProduct($id)
-    {
-        $categories = Category::all();
-        $product = Product::find($id);
-        $totalCartItems = CartItem::where('user_id', $this->userId)
-            ->orWhere('session_id', $this->sessionId)
-            ->sum('quantity');
-        return view('shop.product-detail', compact('product', 'totalCartItems', 'categories'));
-    }
+  
 
     public function about()
     {

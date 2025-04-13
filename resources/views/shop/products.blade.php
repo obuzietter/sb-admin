@@ -19,22 +19,26 @@
 
     <!-- Fruits Shop Start-->
     <div class="container-fluid fruite py-5">
-        <div class="container py-5">
-            <h1 class="mb-4">Fresh fruits shop</h1>
+        <div class="container py-2">
+            @if (request()->input('search'))
+                <h5>Showing results for "{{ request()->input('search') }}"</h5>
+            @endif
             <div class="row g-4">
                 <div class="col-lg-12">
                     <div class="row g-4">
                         <div class="col-xl-3">
                             <div class="input-group w-100 mx-auto d-flex">
-                                <form action="{{ route('product.search') }}" method="GET" class="input-group w-100 mx-auto d-flex">
+                                <form action="{{ route('product.search') }}" method="GET"
+                                    class="input-group w-100 mx-auto d-flex">
                                     @csrf
-                                    <input type="search" class="form-control p-3" placeholder="keywords"
-                                        aria-describedby="search-icon-1">
-                                    <button type="submit" class="btn p-0 border-0 shadow-none"><span
-                                            id="search-icon-1" class="input-group-text p-3 px-4 d-inline-block"><i
+                                    <input type="search" class="form-control p-3" placeholder="Search Product"
+                                        name="search" aria-describedby="search-icon-1"
+                                        value="{{ request()->input('search') }}">
+                                    <button type="submit" class="btn p-0 border-0 shadow-none"><span id="search-icon-1"
+                                            class="input-group-text p-3 px-4 d-inline-block"><i
                                                 class="fa fa-search"></i></span>
                                     </button>
-                                      
+
                                 </form>
 
                             </div>
@@ -64,7 +68,8 @@
                                             @forelse ($categories as $category)
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="bi bi-star-fill"></i>
+                                                        <a href="{{ route('product.category', $category->id) }}"><i
+                                                                class="bi bi-star-fill"></i>
                                                             {{ $category->name }}</a>
                                                         <span>(3)</span>
                                                     </div>
@@ -283,5 +288,6 @@
             document.getElementById('cart-count').innerText = count;
         }
     </script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 @endsection
